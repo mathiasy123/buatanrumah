@@ -187,6 +187,15 @@
                             @enderror
                         </div>
                         <div class="field">
+                            <label class="label">Alamat Rumah Anda</label>
+                            <div class="control">
+                                <input class="input @error('alamat_rumah') is-danger @enderror" name="alamat_rumah" value="{{ old('alamat_rumah') }}" type="text" placeholder="Masukkan Alamat Rumah Anda">
+                            </div>
+                            @error('alamat_rumah')
+                            <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="field">
                             <label class="label">Jumlah Pemesanan (pcs)</label>
                             <div class="control">
                                 <input class="input @error('quantity') is-danger @enderror" name="jumlah" value="{{ old('jumlah') }}"  type="number" placeholder="Masukkan Jumlah Pemesanan">

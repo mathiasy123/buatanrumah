@@ -47,6 +47,7 @@ class OrderController extends Controller
         $request->validate([
             'nama' => 'required',
             'nomor_telepon' => 'required|numeric',
+            'alamat_rumah' => 'required',
             'jumlah' => 'required|numeric'
         ]);
         
@@ -56,6 +57,7 @@ class OrderController extends Controller
             'order_code' => Str::random(9),
             'customer_name' => strip_tags($request->nama),
             'customer_phone' => $request->nomor_telepon,
+            'customer_address' => $request->alamat_rumah,
             'quantity' => $request->jumlah,
             'total_price' => $request->jumlah * $request->harga
         ]);
@@ -85,7 +87,7 @@ class OrderController extends Controller
     public function search(Request $request)
     {
         $request->validate([
-            'order_keyword' => 'nullable|regex:[A-Za-z1-9]'
+            'order_keyword' => 'nullable'
         ]);
 
         $orders = Order::where('order_code', 'LIKE', "%$request->order_keyword%");

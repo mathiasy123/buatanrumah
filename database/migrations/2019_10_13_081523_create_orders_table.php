@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_code', '9')->unique();
             $table->string('customer_name', '50');
             $table->string('customer_phone', '15');
+            $table->string('customer_address', '150');
             $table->integer('quantity');
             $table->integer('total_price');
             $table->timestamps();

@@ -6,13 +6,23 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    /**
+     * Display a listing of the login resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        echo "login";
+        return view('auth.login');
     }
 
-    public function sign()
+    /**
+     * Display a listing of the signup resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function signup()
     {
-        echo "sign";
+        return view('auth.signup');
     }
 }

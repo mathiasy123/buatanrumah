@@ -11,7 +11,8 @@
 |
 */
 Route::get('/login', 'AuthController@index');
-Route::get('/signup', 'AuthController@sign');
+Route::get('/signup', 'AuthController@signup');
+Route::post('/signup', 'UserController@store');
 
 Route::get('/', 'VendorController@index');
 
