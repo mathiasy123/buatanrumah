@@ -39,7 +39,7 @@
                         @foreach($orders as $order)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $order->order_code }}</td>
+                            <td>{{ strtoupper($order->order_code) }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>
                                 <a href="/order/detail/{{ $order->order_id }}" class="button is-info is-rounded">Lihat Detail</a>
@@ -49,17 +49,9 @@
 
                     </tbody>
                 </table>
-                <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-                    <a class="pagination-previous">Previous</a>
-                    <a class="pagination-next">Next page</a>
-                    <ul class="pagination-list">
-                        <li><a class="pagination-link is-current">1</a></li>
-                        <li><a class="pagination-link">2</a></li>
-                        <li><a class="pagination-link">3</a></li>
-                        <li><a class="pagination-link">4</a></li>
-                        <li><a class="pagination-link">5</a></li>
-                    </ul>
-                </nav>
+                
+                {{ $orders->links() }}
+
             </div>
         </div>
     </div>

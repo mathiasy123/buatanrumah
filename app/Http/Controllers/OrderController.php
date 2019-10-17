@@ -19,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id', 1)->get();
+        $orders = Order::where('user_id', 1)->paginate(10);
 
         return view('chef.order')->with('orders', $orders);
     }
@@ -31,9 +31,9 @@ class OrderController extends Controller
      */
     public function create($food_id)
     {
-        $food_order = Food::where('food_id', $food_id)->first();
+        $food = Food::where('food_id', $food_id)->first();
 
-        return view('chef.form_order')->with('food', $food_order);
+        return view('chef.form_order', compact('food'));
     }
 
     /**
@@ -77,7 +77,7 @@ class OrderController extends Controller
                         ->where('order_id', $order_id)
                         ->first();
 
-        return view('chef.order_detail')->with('order_detail', $order_detail);
+        return view('chef.order_detail', compact('order_detail'));
     }
 
     /**

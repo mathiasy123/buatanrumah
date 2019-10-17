@@ -163,7 +163,7 @@
         <div class="columns">
             <div class="column is-12">
                 <div class="content">
-                    <h1>Kode : {{ $order_detail->order_code }}</h1>
+                    <h1>Kode : {{ strtoupper($order_detail->order_code) }}</h1>
                     <progress class="progress is-small is-warning" value="100"></progress>
                 </div>
             </div>

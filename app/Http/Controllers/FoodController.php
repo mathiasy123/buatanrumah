@@ -29,29 +29,6 @@ class FoodController extends Controller
     }
 
     /**
-     * Find the specified order resource.
-     *
-     * @param  int  $order_id
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $request->validate([
-            'food_keyword' => 'nullable'
-        ]);
-
-        $keyword = $request->food_keyword;
-
-        $foods = Food::where('user_id', 1)
-                    ->where('food_name', 'LIKE', "%$keyword")
-                    ->orWhere('rating', 'LIKE', "%$keyword")
-                    ->orWhere('price', 'LIKE', "%$keyword")
-                    ->get();
-
-        return back()->with('foods', $foods);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -107,3 +84,5 @@ class FoodController extends Controller
         //
     }
 }
+
+

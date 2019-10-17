@@ -93,7 +93,7 @@
                         @foreach($orders as $order)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $order->order_code }}</td>
+                            <td>{{ strtoupper($order->order_code) }}</td>
                             <td>{{ $order->created_at }}</td>
                         </tr>
                         @endforeach

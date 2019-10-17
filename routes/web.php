@@ -19,7 +19,7 @@ Route::get('/', 'VendorController@index');
 Route::get('/chef', 'UserController@index');
 
 Route::get('/profile/{user_id}', 'UserController@profile');
-Route::post('/profile/food', 'FoodController@search');
+Route::post('/profile/{user_id}', 'UserController@profile');
 Route::get('/profile/order/food/{food_id}', 'OrderController@create');
 
 Route::get('/order', 'OrderController@index');

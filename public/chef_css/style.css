@@ -164,6 +164,11 @@ i.checked {
         width: 100%;
     }
 
+    /* Button Style */
+    .reset-button {
+        width: 100%;
+    }
+
     /* Form Style */
     .jelajahi-text {
         text-align: center

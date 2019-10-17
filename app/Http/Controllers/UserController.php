@@ -33,15 +33,23 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the profile resource.
+     * Display a listing of the food profile resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function profile($user_id) 
+    public function profile($user_id, Request $request) 
     {
-        $foods = Food::where('user_id', $user_id)->paginate(6);
+        $foods = Food::where('user_id', $user_id)
+                    ->when($request->food_keyword, function($query) use($request){
+                        $query->where('food_name', 'like', '%' . strip_tags($request->food_keyword) . '%')
+                        ->orWhere('rating', $request->food_keyword)
+                        ->orWhere('price', $request->food_keyword);
+                    })
+                    ->paginate(6);
         
-        return view('chef.profile')->with('foods', $foods);
+        $foods->appends($request->only('food_keyword'));
+        
+        return view('chef.profile', compact('foods'));
     }
 
     /**
