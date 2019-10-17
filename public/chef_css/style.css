@@ -39,7 +39,7 @@ i.checked {
 
 /* Card Style */
 .card {
-    border-radius: 25px;
+    height: 100%;
     box-shadow: 2px 2px 4px;
 }
 

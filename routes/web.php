@@ -19,10 +19,12 @@ Route::get('/', 'VendorController@index');
 Route::get('/chef', 'UserController@index');
 
 Route::get('/profile/{user_id}', 'UserController@profile');
+Route::post('/profile/food', 'FoodController@search');
 Route::get('/profile/order/food/{food_id}', 'OrderController@create');
 
 Route::get('/order', 'OrderController@index');
 Route::post('/order', 'OrderController@store');
 Route::post('/order/search', 'OrderController@search');
+Route::get('/order/detail/{order_id}', 'OrderController@show');
 
 Route::get('/food', 'FoodController@index');

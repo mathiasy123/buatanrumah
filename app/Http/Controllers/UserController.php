@@ -17,7 +17,7 @@ class UserController extends Controller
     /**
      * Display a listing of the dashboard resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsee3
      */
     public function index()
     {
@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function profile($user_id) 
     {
-        $foods = Food::where('user_id', $user_id)->get();
+        $foods = Food::where('user_id', $user_id)->paginate(6);
         
         return view('chef.profile')->with('foods', $foods);
     }
@@ -70,8 +70,8 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name' => strip_tags($request->nama_user),
-            'email' => $request->email,
+            'name' => strtolower(strip_tags($request->nama_user)),
+            'email' => strtolower($request->email),
             'phone_call' => $request->nomor_telepon,
             'password' => Hash::make(strip_tags($request->password)),
             'role_id' => 1

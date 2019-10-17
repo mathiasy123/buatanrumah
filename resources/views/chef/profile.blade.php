@@ -33,17 +33,26 @@
     <div class="container">
         <div class="columns is-centered is-mobile">
             <div class="column">
-                <div class="control has-icons-right">
-                    <input class="input is-medium" type="text" placeholder="Cari Masakan">
-                    <span class="icon is-right">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
+                <form method="post" action="/profile/food">
+                    @csrf
+
+                    <div class="control has-icons-right">
+                        <input class="input is-medium @error('food_keyword') is-danger @enderror" name="food_keyword" type="text" placeholder="Cari Masakan">
+                        <span class="icon is-right">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        @error('food_keyword')
+                        <p class="help is-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </form>
             </div>
         </div>
+
+        @foreach($foods->chunk(3) as $chunk)
         <div class="columns">
 
-            @foreach($foods as $food)
+            @foreach($chunk as $food)
             <div class="column is-4">
                 <div class="card">
                     <div class="card-image">
@@ -54,8 +63,8 @@
                     <div class="card-content">
                         <div class="content">
                             <h1>{{ $food->food_name }}</h1>
-                            <h6>Rating: {{ $food->rating }}/10</h6>
-                            <p>{{ $food->description }}</p>
+                            <h5>Rating: {{ $food->rating }}/10</h5>
+                            <h5>Price: Rp {{ number_format($food->price) }}</h5>
                         </div>
                     </div>
                     <footer class="card-footer">
@@ -66,17 +75,10 @@
             @endforeach
 
         </div>
-        <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-            <a class="pagination-previous">Previous</a>
-            <a class="pagination-next">Next page</a>
-            <ul class="pagination-list">
-                <li><a class="pagination-link is-current">1</a></li>
-                <li><a class="pagination-link">2</a></li>
-                <li><a class="pagination-link">3</a></li>
-                <li><a class="pagination-link">4</a></li>
-                <li><a class="pagination-link">5</a></li>
-            </ul>
-        </nav>
+        @endforeach
+
+        {{ $foods->links() }}
+
     </div>
 </section>
 <!-- End List Produk Section -->

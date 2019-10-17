@@ -46,18 +46,18 @@ class OrderController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nomor_telepon' => 'required|numeric',
-            'alamat_rumah' => 'required',
+            'nomor_telepon' => 'required|numeric|digits_between:9,15',
+            'alamat_rumah' => 'required|max:150',
             'jumlah' => 'required|numeric'
         ]);
         
         Order::create([
             'user_id' => $request->user_id,
             'food_id' => $request->food_id,
-            'order_code' => Str::random(9),
-            'customer_name' => strip_tags($request->nama),
+            'order_code' => strtolower(Str::random(9)),
+            'customer_name' => strtolower(strip_tags($request->nama)),
             'customer_phone' => $request->nomor_telepon,
-            'customer_address' => $request->alamat_rumah,
+            'customer_address' => strtolower($request->alamat_rumah),
             'quantity' => $request->jumlah,
             'total_price' => $request->jumlah * $request->harga
         ]);
@@ -73,9 +73,11 @@ class OrderController extends Controller
      */
     public function show($order_id)
     {
-        $orders = Order::find($order_id);
+        $order_detail = Order::join('foods', 'orders.food_id', '=', 'foods.food_id')
+                        ->where('order_id', $order_id)
+                        ->first();
 
-        return view('chef.detail_order')->with('orders', $orders);
+        return view('chef.order_detail')->with('order_detail', $order_detail);
     }
 
     /**
@@ -90,7 +92,7 @@ class OrderController extends Controller
             'order_keyword' => 'nullable'
         ]);
 
-        $orders = Order::where('order_code', 'LIKE', "%$request->order_keyword%");
+        $orders = Order::where('order_code', 'LIKE', "%$request->order_keyword%")->get();
 
         return view('chef.order')->with('orders', $orders);
     }

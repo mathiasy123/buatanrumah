@@ -30,4 +30,14 @@ class Food extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Set the Food and Order relation.
+     *
+     * One to One Relation (Food => Order)
+     */
+    public function order()
+    {
+        return $this->belongsTo('App\Order');
+    }
 }

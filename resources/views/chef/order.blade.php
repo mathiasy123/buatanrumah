@@ -42,7 +42,7 @@
                             <td>{{ $order->order_code }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>
-                                <a href="/order/detail/1" class="button is-info is-rounded">Lihat Detail</a>
+                                <a href="/order/detail/{{ $order->order_id }}" class="button is-info is-rounded">Lihat Detail</a>
                             </td>
                         </tr>
                         @endforeach

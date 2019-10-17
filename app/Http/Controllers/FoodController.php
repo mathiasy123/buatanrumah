@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Food;
+
 class FoodController extends Controller
 {
     /**
@@ -24,6 +26,29 @@ class FoodController extends Controller
     public function create()
     {
         //
+    }
+
+    /**
+     * Find the specified order resource.
+     *
+     * @param  int  $order_id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $request->validate([
+            'food_keyword' => 'nullable'
+        ]);
+
+        $keyword = $request->food_keyword;
+
+        $foods = Food::where('user_id', 1)
+                    ->where('food_name', 'LIKE', "%$keyword")
+                    ->orWhere('rating', 'LIKE', "%$keyword")
+                    ->orWhere('price', 'LIKE', "%$keyword")
+                    ->get();
+
+        return back()->with('foods', $foods);
     }
 
     /**
