@@ -12,26 +12,43 @@
                     <div class="card-content">
                         <div class="content">
                             <h1 class="header-login">Login</h1>
-                            <div class="field">
-                                <label for="email" class="label">Name</label>
-                                <div class="control">
-                                    <input class="input is-rounded" type="text" placeholder="example@gmail.com"
-                                        id="email">
+
+                            @if(session('registered'))
+                            <div class="notification is-success">
+                                <button class="delete"></button>
+                                {{ session('registered') }}
+                            </div>
+                            @endif
+                            
+                            <form method="post" action="/login">
+                                @csrf
+                                <div class="field">
+                                    <label for="email" class="label">Email</label>
+                                    <div class="control">
+                                        <input class="input is-rounded @error('email') is-danger @enderror" name="email" type="text" placeholder="example@gmail.com"
+                                            id="email">
+                                    </div>
+                                    @error('email')
+                                    <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                            </div>
-                            <div class="field">
-                                <label for="password" class="label">Password</label>
-                                <div class="control">
-                                    <input class="input is-rounded" type="password" placeholder="********"
-                                        id="password">
+                                <div class="field">
+                                    <label for="password" class="label">Password</label>
+                                    <div class="control">
+                                        <input class="input is-rounded @error('password') is-danger @enderror" name="password" type="password" placeholder="********"
+                                            id="password">
+                                    </div>
+                                    @error('password')
+                                    <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                            </div>
-                            <p class="info-sign">Belum memiliki akun? <a href="/signup">Sign up</a> disini!</p>
-                            <div class="button-center">
-                                <a href="index.html" class="login-button button is-outlined is-warning is-rounded">
-                                    <strong>Log In</strong>
-                                </a>
-                            </div>
+                                <p class="info-sign">Belum memiliki akun? <a href="/signup">Sign up</a> disini!</p>
+                                <div class="button-center">
+                                    <button type="submit" class="login-button button is-outlined is-warning is-rounded">
+                                        <strong>Log In</strong>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

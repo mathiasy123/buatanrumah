@@ -25,6 +25,10 @@
 
     @yield('content')
 
+
+    <!-- Own Javascript -->
+    <script src="{{ asset('auth_js/script.js') }}"></script>
+
 </body>
 
 </html>

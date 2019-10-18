@@ -11,20 +11,23 @@
 |
 */
 Route::get('/login', 'AuthController@index');
+Route::post('/login', 'AuthController@authenticate');
 Route::get('/signup', 'AuthController@signup');
 Route::post('/signup', 'UserController@store');
 
 Route::get('/', 'VendorController@index');
 
-Route::get('/chef', 'UserController@index');
-
 Route::get('/profile/{user_id}', 'UserController@profile');
 Route::post('/profile/{user_id}', 'UserController@profile');
 Route::get('/profile/order/food/{food_id}', 'OrderController@create');
 
+Route::post('/order/store', 'OrderController@store');
+
+Route::get('/chef', 'UserController@index');
+
 Route::get('/order', 'OrderController@index');
 Route::post('/order', 'OrderController@index');
-Route::post('/order/store', 'OrderController@store');
+
 Route::get('/order/detail/{order_id}', 'OrderController@show');
 
 Route::get('/food', 'FoodController@index');

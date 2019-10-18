@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Session;
+
 use App\Order;
 
 use App\Food;
@@ -39,7 +41,7 @@ class UserController extends Controller
      */
     public function profile($user_id, Request $request) 
     {
-        $request->session()->forget('food_not_found');
+        Session::forget('food_not_found');
 
         $request->validate([
             'food_keyword' => 'nullable'
@@ -58,31 +60,22 @@ class UserController extends Controller
         if(count($foods)) {
             return view('chef.profile', compact('foods'));
         }else {
-            $request->session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
+            Session::flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
+            
             return view('chef.profile', compact('foods'));
         }
-        
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(Request $request)
     {
+        Session::forget('registered');
+
         $request->validate([
             'nama_user' => 'required|max:50',
             'email' => 'required|email|max:50',
@@ -97,6 +90,18 @@ class UserController extends Controller
             'password' => Hash::make(strip_tags($request->password)),
             'role_id' => 1
         ]);
+
+        return redirect('/login')->with('registered', 'Anda telah berhasil membuat akun, silahkan login');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        
     }
 
     /**
