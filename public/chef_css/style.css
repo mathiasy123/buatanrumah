@@ -7,6 +7,10 @@ i.checked {
     color: #FFDD57;
 }
 
+.flash-message {
+    margin-top: 50px;
+}
+
 /* Button Style */
 .login-button {
     color: black !important;

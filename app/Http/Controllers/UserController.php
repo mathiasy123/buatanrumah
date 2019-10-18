@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $count_order = Order::where('user_id', 1)->count();
 
-        $count_food = Order::where('user_id', 1)->count();
+        $count_food = Food::where('user_id', 1)->count();
 
         $orders = Order::where('user_id', 1)->limit(10)->get();
 
@@ -39,6 +39,12 @@ class UserController extends Controller
      */
     public function profile($user_id, Request $request) 
     {
+        $request->session()->forget('food_not_found');
+
+        $request->validate([
+            'food_keyword' => 'nullable'
+        ]);
+
         $foods = Food::where('user_id', $user_id)
                     ->when($request->food_keyword, function($query) use($request){
                         $query->where('food_name', 'like', '%' . strip_tags($request->food_keyword) . '%')
@@ -48,8 +54,15 @@ class UserController extends Controller
                     ->paginate(6);
         
         $foods->appends($request->only('food_keyword'));
+
+        if(count($foods)) {
+            return view('chef.profile', compact('foods'));
+        }else {
+            $request->session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
+            return view('chef.profile', compact('foods'));
+        }
         
-        return view('chef.profile', compact('foods'));
+        
     }
 
     /**

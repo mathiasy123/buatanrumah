@@ -17,11 +17,28 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::where('user_id', 1)->paginate(10);
+        $request->session()->forget('order_not_found');
 
-        return view('chef.order')->with('orders', $orders);
+        $request->validate([
+            'order_keyword' => 'nullable'
+        ]);
+
+        $orders = Order::where('user_id', 1)
+                    ->when($request->order_keyword, function($query) use ($request){
+                        $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%');
+                    })
+                    ->paginate(10);
+        
+        $orders->appends($request->only('order_keyword'));
+            
+        if(count($orders) > 0) {
+            return view('chef.order', compact('orders'));
+        }else {
+            $request->session()->flash('order_not_found', 'Maaf data pemesanan yang Anda cari tidak ada');
+            return view('chef.order', compact('orders'));
+        }  
     }
 
     /**
@@ -78,23 +95,6 @@ class OrderController extends Controller
                         ->first();
 
         return view('chef.order_detail', compact('order_detail'));
-    }
-
-    /**
-     * Find the specified order resource.
-     *
-     * @param  int  $order_id
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $request->validate([
-            'order_keyword' => 'nullable'
-        ]);
-
-        $orders = Order::where('order_code', 'LIKE', "%$request->order_keyword%")->get();
-
-        return view('chef.order')->with('orders', $orders);
     }
 
     /**

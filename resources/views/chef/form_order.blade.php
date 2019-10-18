@@ -164,7 +164,7 @@
             <div class="column is-12">
                 <div class="content">
                     <h5>* Harap isi form pemesanan dengan lengkap untuk melakukan pemesanan</h5>
-                    <form method="post" action="/order">
+                    <form method="post" action="/order/store">
                         @csrf
                         <input type="hidden" name="food_id" value="{{ $food->food_id }}">
                         <input type="hidden" name="user_id" value="{{ $food->user_id }}">

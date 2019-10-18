@@ -23,8 +23,8 @@ Route::post('/profile/{user_id}', 'UserController@profile');
 Route::get('/profile/order/food/{food_id}', 'OrderController@create');
 
 Route::get('/order', 'OrderController@index');
-Route::post('/order', 'OrderController@store');
-Route::post('/order/search', 'OrderController@search');
+Route::post('/order', 'OrderController@index');
+Route::post('/order/store', 'OrderController@store');
 Route::get('/order/detail/{order_id}', 'OrderController@show');
 
 Route::get('/food', 'FoodController@index');

@@ -30,29 +30,39 @@
 <!-- List Produk Section -->
 <section class="section" id="masakan">
     <h1 class="title rekom-title">Masakan</h1>
-    <div class="container">
+    <div class="container is-fluid">
         <div class="columns is-centered is-desktop">
             <div class="column is-9">
                 <form method="post" action="{{ url()->current() }}">
                     @csrf
-                    <div class="control has-icons-right">
-                        <input class="input is-medium @error('food_keyword') is-danger @enderror" name="food_keyword" type="text" placeholder="Cari Masakan">
-                        <span class="icon is-right">
-                            <i class="fas fa-search"></i>
-                        </span>
 
-                        @error('food_keyword')
-                        <p class="help is-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    
+                        <div class="control has-icons-right">
+                            <input class="input is-medium @error('food_keyword') is-danger @enderror" name="food_keyword" type="text" placeholder="Cari Masakan">
+                            <span class="icon is-right">
+                                <i class="fas fa-search"></i>
+                            </span>
+
+                            @error('food_keyword')
+                            <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                 </form>
                 
             </div>
+
             <div class="column is-2">
                 <a href="/profile/1" class="button reset-button is-danger is-rounded is-medium">Reset Pencarian</a>
             </div>
         </div>
+
+        @if(session('food_not_found'))
+
+            <div class="content">
+                <h3 class="has-text-centered flash-message">-- {{ @session('food_not_found') }} --</h3>
+            </div>
+
+        @else
 
         @foreach($foods->chunk(3) as $chunk)
         <div class="columns">
@@ -83,6 +93,8 @@
         @endforeach
 
         {{ $foods->links() }}
+
+        @endif
 
     </div>
 </section>
