@@ -16,6 +16,7 @@ use App\User;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the dashboard resource.
      *
@@ -23,15 +24,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $count_order = Order::where('user_id', 1)->count();
+        $user = auth()->user();
 
-        $count_food = Food::where('user_id', 1)->count();
+        $count_order = Order::where('user_id', $user->id)->count();
 
-        $orders = Order::where('user_id', 1)->limit(10)->get();
+        $count_food = Food::where('user_id', $user->id)->count();
 
-        $foods = Food::where('user_id', 1)->limit(10)->get();
+        $orders = Order::where('user_id', $user->id)->limit(10)->get();
 
-        return view('chef.dashboard', compact('count_order', 'count_food', 'orders', 'foods'));
+        $foods = Food::where('user_id', $user->id)->limit(10)->get();
+
+        return view('chef.dashboard', compact('user', 'count_order', 'count_food', 'orders', 'foods'));
     }
 
     /**
@@ -74,24 +77,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        Session::forget('registered');
 
-        $request->validate([
-            'nama_user' => 'required|max:50',
-            'email' => 'required|email|max:50',
-            'nomor_telepon' => 'required|numeric|digits_between:9,15',
-            'password' => 'required|confirmed'
-        ]);
-
-        User::create([
-            'name' => strtolower(strip_tags($request->nama_user)),
-            'email' => strtolower($request->email),
-            'phone_call' => $request->nomor_telepon,
-            'password' => Hash::make(strip_tags($request->password)),
-            'role_id' => 1
-        ]);
-
-        return redirect('/login')->with('registered', 'Anda telah berhasil membuat akun, silahkan login');
     }
 
     /**

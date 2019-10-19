@@ -23,7 +23,7 @@ class CreateFoodsTable extends Migration
             $table->integer('price');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
