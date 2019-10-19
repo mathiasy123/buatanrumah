@@ -1,0 +1,139 @@
+/* Global Style */
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Button Style */
+.login-button {
+    color: black !important;
+    padding: 0px 30px !important;
+    border: 3px solid #EDD93A !important;
+}
+
+.button-more {
+    text-align: center;
+    margin-top: 80px;
+}
+
+/* Pemasak Section Style */
+.rekom-title {
+    text-align: center;
+}
+
+/* Card Style */
+.card {
+    border-radius: 25px;
+    box-shadow: 2px 2px 4px;
+}
+
+/* Footer Style */
+.footer {
+    border-top: 30px solid #A3B40E;
+    background-color: #292C3F;
+}
+
+.text-copyright {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Desktop Version */
+@media (min-width: 1024px) and (max-width: 1408px) {
+
+    /* Navbar Style */
+    .navbar-item:hover {
+        background-color: white !important;
+    }
+
+    .menu-item:hover {
+        border-bottom: 4px solid #EDD93A;
+    }
+
+    /* Hero Style */
+    .hero-body {
+        margin-left: 30px;
+        text-align: left;
+    }
+
+    .title-hero-2 {
+        margin-top: 60px;
+    }
+
+    .hero-text {
+        margin-top: 50px;
+        margin-bottom: 40px;
+        font-size: 20px;
+    }
+
+    /* Section Style */
+    .content-tentang {
+        margin: 30px 20px 0px;
+        text-align: center;
+    }
+
+    .tentang-text {
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    /* Footer Style */
+    .navigasi-section {
+        margin-left: 100px;
+    }
+
+    .border-text-footer {
+        padding-bottom: 10px;
+        border-bottom: 5px solid #EDD93A;
+        width: 150px;
+    }
+}
+
+/* Mobile Version */
+@media (min-width: 320px) and (max-width: 1024px) {
+
+    /* Navbar Style */
+    .menu-center {
+        text-align: center;
+    }
+
+    /* Hero Style */
+    .hero-body {
+        text-align: center;
+    }
+
+    .title-hero-5 {
+        margin-bottom: 30px;
+    }
+
+    /* Section Style */
+    .content-tentang {
+        margin: 30px 20px 0px;
+        text-align: center;
+    }
+
+    .tentang-text {
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    /* Footer Style */
+    .logo-text {
+        text-align: center;
+    }
+
+    .border-text-footer {
+        padding-bottom: 10px;
+        border-bottom: 5px solid #EDD93A;
+    }
+
+    /* Button Style */
+    .login-button {
+        width: 100%;
+    }
+
+    /* Form Style */
+    .jelajahi-text {
+        text-align: center
+    }
+
+}
