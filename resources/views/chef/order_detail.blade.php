@@ -178,7 +178,7 @@
                     <p>{{ $order_detail->customer_phone }}</p>
 
                     <h5>Alamat Rumah : </h5>
-                    <p>{{ $order_detail->customer_address }}</p>
+                    <p>{{ ucwords($order_detail->customer_address) }}</p>
                 </div>
             </div>
             <div class="column is-6">
@@ -189,7 +189,7 @@
                     <h5>Harga Makanan : </h5>
                     <p>Rp {{ number_format($order_detail->price) }}</p>
 
-                    <h5>Jumlah Pemesanan : </h5>
+                    <h5>Total : </h5>
                     <p>Rp {{ number_format($order_detail->total_price) }}</p>
                 </div>
             </div>

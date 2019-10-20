@@ -25,12 +25,9 @@
     </footer>
     <!-- End Footer Section -->
 
-    <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
     <!-- Own Javascript -->
     <script src="{{ asset('chef_js/script.js') }}"></script>
+
 </body>
 
 </html>

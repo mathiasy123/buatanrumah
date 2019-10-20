@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
 
-use Illuminate\Support\Facades\Session;
-
 use App\Order;
 
 use App\Food;
@@ -34,7 +32,7 @@ class UserController extends Controller
 
         $foods = Food::where('user_id', $user->id)->limit(10)->get();
 
-        return view('chef.dashboard', compact('user', 'count_order', 'count_food', 'orders', 'foods'));
+        return view('chef.dashboard', compact('count_order', 'count_food', 'orders', 'foods'));
     }
 
     /**
@@ -44,7 +42,7 @@ class UserController extends Controller
      */
     public function profile($user_id, Request $request) 
     {
-        Session::forget('food_not_found');
+        session()->forget('food_not_found');
 
         $request->validate([
             'food_keyword' => 'nullable'
@@ -63,7 +61,7 @@ class UserController extends Controller
         if(count($foods)) {
             return view('chef.profile', compact('foods'));
         }else {
-            Session::flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
+            session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
             
             return view('chef.profile', compact('foods'));
         }

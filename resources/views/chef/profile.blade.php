@@ -13,7 +13,7 @@
         </div>
         <div class="column is-6 has-background-warning">
             <div class="hero-body">
-                <h2 class="is-size-2 title-hero-2"><strong>Jessica Doe</strong></h2>
+                <h2 class="is-size-2 title-hero-2"><strong>{{ ucwords(auth()->user()->name) }}</strong></h2>
                 <h5 class="is-size-5 title-hero-5">Pemasak Standar</h5>
                 <p class="hero-text is-hidden-mobile">
                     Ibu Jessica Doe Sangat Ahli dalam membuat beraneka lauk dan sayur yang dapat memanjakan lidah
@@ -99,4 +99,38 @@
     </div>
 </section>
 <!-- End List Produk Section -->
+
+@if(session('order_notif'))
+
+<!-- Modal SECTION -->
+<div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title has-text-success has-text-centered">PEMESANAN BERHASIL</p>
+            <button class="delete" id="modal-close" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+        <div class="content">
+            <p class="has-text-danger">* Dimohon untuk mencatat kode pemesanan Anda.</p>
+            <p><strong>Kode Pemesanan Anda : {{ strtoupper(session('order_notif')) }}</strong></p>
+            <p>Silahkan, kontak pemasak untuk melakukan transaksi pembayaran dan informasi lebih lanjut.</p>
+            <p>Terima Kasih.</p>
+        </div>
+        </section>
+    </div>
+</div>
+<!-- End Modal Section -->
+
+
+<script>
+    $('.modal').addClass('is-active');
+
+    $('#modal-close').on('click', function () {
+        $('.modal').removeClass('is-active');
+    });
+</script>
+
+@endif
+
 @endsection

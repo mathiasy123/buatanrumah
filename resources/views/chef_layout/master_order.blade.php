@@ -43,13 +43,6 @@
                         Kontak
                     </a>
 
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a href="/chef" class="login-button button is-outlined is-warning is-rounded">
-                                <strong>Kembali</strong>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

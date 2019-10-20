@@ -67,17 +67,21 @@ class OrderController extends Controller
             'alamat_rumah' => 'required|max:150',
             'jumlah' => 'required|numeric'
         ]);
+
+        $order_code = strtolower(Str::random(9));
         
         Order::create([
             'user_id' => $request->user_id,
             'food_id' => $request->food_id,
-            'order_code' => strtolower(Str::random(9)),
+            'order_code' => $order_code,
             'customer_name' => strtolower(strip_tags($request->nama)),
             'customer_phone' => $request->nomor_telepon,
             'customer_address' => strtolower($request->alamat_rumah),
             'quantity' => $request->jumlah,
             'total_price' => $request->jumlah * $request->harga
         ]);
+
+        session()->flash('order_notif', $order_code);
 
         return redirect("/profile/$request->user_id");
     }

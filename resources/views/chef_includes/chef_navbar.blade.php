@@ -3,7 +3,7 @@
     <div class="container">
         <div class="navbar-brand"> 
             <a href="/biodata/1" class="navbar-item">
-                <h5 class="is-size-5"><strong>{{ ucwords($user->name) }}</strong></h5>
+                <h5 class="is-size-5"><strong>{{ ucwords(auth()->user()->name) }}</strong></h5>
             </a>
 
             <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
@@ -30,7 +30,7 @@
 
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a href="/profile/1" class="login-button button is-outlined is-warning is-rounded">
+                        <a href="/profile/{{ auth()->user()->id }}" class="login-button button is-outlined is-warning is-rounded">
                             <strong>Lihat Profile</strong>
                         </a>
                         <a href="/logout" class="login-button button is-outlined is-warning is-rounded">

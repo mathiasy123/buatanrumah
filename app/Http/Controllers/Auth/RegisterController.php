@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'role_id' => 1
         ]);
 
-        return redirect('/login')->with('registered', 'Anda telah berhasil membuat akun, silahkan login');
+        return redirect('/login')->with('registered', 'Anda telah berhasil membuat akun, silahkan masuk aplikasi');
     }
 
 }

@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 
 use Faker\Factory as Faker;
 
+use App\Food;
+
 class FoodSeeder extends Seeder
 {
     /**
@@ -15,9 +17,9 @@ class FoodSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        foreach(range(0, 10) as $iteration) {
+        foreach(range(0, 19) as $iteration) {
 
-            DB::table('foods')->insert([
+            Food::create([
                 'user_id' => 1,
                 'food_name' => $faker->word,
                 'rating' => $faker->numberBetween(1, 10),
