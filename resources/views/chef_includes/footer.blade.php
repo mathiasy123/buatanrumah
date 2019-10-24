@@ -23,11 +23,11 @@
             <div class="column is-4 has-text-light logo-text">
                 <h3 class="border-text-footer has-text-light">Info kontak</h3>
                 <p>
-                    Sunter STS blok L nomor 17
+                    {{ ucwords(auth()->user()->address) }}
                 </p>
-                <p><i class="fab fa-whatsapp fa-lg"></i> 0817-6986-998</p>
-                <p><i class="far fa-envelope fa-lg"></i> jessicadoe@gmail.com</p>
-                <p><i class="fab fa-instagram fa-lg"></i> jessicadoe</p>
+                <p><i class="fab fa-whatsapp fa-lg"></i> {{ auth()->user()->phone_call }}</p>
+                <p><i class="far fa-envelope fa-lg"></i> {{ auth()->user()->email }}</p>
+                <p><i class="fab fa-instagram fa-lg"></i> {{ auth()->user()->instagram }}</p>
             </div>
         </div>
         <p class="has-text-light text-copyright">Copyrights Logo © 2019. All Right Reserved</p>
