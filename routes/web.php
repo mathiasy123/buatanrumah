@@ -25,18 +25,20 @@ Route::prefix('register')->group(function () {
 });
 
 /**
+ * Admin (CMS) Login And Other Routes
+ */
+Route::prefix('admin')->group(function () {
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm');
+    Route::post('/login', 'Auth\AdminLoginController@login');
+    Route::get('/', 'AdminController@index');
+});
+
+/**
  * User (Chef) Login Routes
  */
 Route::prefix('login')->group(function () {
     Route::get('/', 'Auth\LoginController@showLoginForm');
     Route::post('/', 'Auth\LoginController@login');
-});
-
-/**
- * Admin (CMS) Login And Other Routes
- */
-Route::prefix('admin')->group(function () {
-    Route::get('login', 'Auth\AdminLoginController@showLoginForm');
 });
 
 /**
@@ -48,11 +50,10 @@ Route::get('/logout', 'Auth\LoginController@logout');
  * Chef's Profile Routes
  */
 Route::prefix('profile')->group(function () {
-    Route::get('{user_id}', 'UserController@profile');
-    Route::get('order/food/{food_id}', 'OrderController@create');
-    Route::post('{user_id}', 'UserController@profile');
+    Route::get('/order/food/{food_id}', 'OrderController@create');
+    Route::get('/{user_id}', 'ProfileController@index');
+    Route::post('/{user_id}', 'ProfileController@index');
 });
-
 
 /**
  * Chef's Dashboard Routes
@@ -63,10 +64,10 @@ Route::get('/chef', 'UserController@index');
  * Order Routes
  */
 Route::prefix('order')->group(function () {
+    Route::get('/detail/{order_id}', 'OrderController@show');
+    Route::post('/store', 'OrderController@store');
     Route::get('/', 'OrderController@index');
-    Route::get('detail/{order_id}', 'OrderController@show');
     Route::post('/', 'OrderController@index');
-    Route::post('store', 'OrderController@store');
 });
 
 /**

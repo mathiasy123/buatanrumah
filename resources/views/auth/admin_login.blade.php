@@ -13,13 +13,6 @@
                         <div class="content">
                             <h1 class="header-login">Masuk Aplikasi Admin</h1>
 
-                            @if(session('registered'))
-                            <div class="notification is-success">
-                                <button class="delete"></button>
-                                {{ session('registered') }}
-                            </div>
-                            @endif
-
                             @if(session('error_login'))
                             <div class="notification is-danger">
                                 <button class="delete"></button>
@@ -27,12 +20,12 @@
                             </div>
                             @endif
                             
-                            <form method="post" action="/login">
+                            <form method="post" action="/admin/login">
                                 @csrf
                                 <div class="field">
                                     <label for="email" class="label">Email</label>
                                     <div class="control">
-                                        <input class="input is-rounded @error('email') is-danger @enderror" name="email" type="text" placeholder="example@gmail.com"
+                                        <input class="input is-rounded @error('email') is-danger @enderror" name="email" value="{{ @old('email') }}" type="text" placeholder="example@gmail.com"
                                             id="email">
                                     </div>
                                     @error('email')
@@ -49,9 +42,8 @@
                                     <p class="help is-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <p class="info-sign">Belum memiliki akun? <a href="/register">Daftar Akun</a> disini!</p>
                                 <div class="button-center">
-                                    <button type="submit" class="login-button button is-outlined is-warning is-rounded">
+                                    <button type="submit" class="admin-login-button button is-outlined is-warning is-rounded">
                                         <strong>Log In</strong>
                                     </button>
                                 </div>

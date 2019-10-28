@@ -16,6 +16,15 @@ use App\User;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the dashboard resource.
@@ -35,38 +44,6 @@ class UserController extends Controller
         $foods = Food::where('user_id', $user->id)->limit(10)->get();
 
         return view('chef.dashboard', compact('count_order', 'count_food', 'orders', 'foods'));
-    }
-
-    /**
-     * Display a listing of the food profile resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile($user_id, Request $request) 
-    {
-        session()->forget('food_not_found');
-
-        $request->validate([
-            'food_keyword' => 'nullable'
-        ]);
-
-        $foods = Food::where('user_id', $user_id)
-                    ->when($request->food_keyword, function($query) use($request){
-                        $query->where('food_name', 'like', '%' . strip_tags($request->food_keyword) . '%')
-                        ->orWhere('rating', $request->food_keyword)
-                        ->orWhere('price', $request->food_keyword);
-                    })
-                    ->paginate(6);
-        
-        $foods->appends($request->only('food_keyword'));
-
-        if(count($foods)) {
-            return view('chef.profile', compact('foods'));
-        }else {
-            session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
-            
-            return view('chef.profile', compact('foods'));
-        }
     }
 
     /**

@@ -32,7 +32,7 @@
                                 <div class="field">
                                     <label for="email" class="label">Email</label>
                                     <div class="control">
-                                        <input class="input is-rounded @error('email') is-danger @enderror" name="email" type="text" placeholder="example@gmail.com"
+                                        <input class="input is-rounded @error('email') is-danger @enderror" name="email" value="{{ @old('email') }}" type="text" placeholder="example@gmail.com"
                                             id="email">
                                     </div>
                                     @error('email')

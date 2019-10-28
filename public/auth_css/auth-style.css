@@ -27,6 +27,14 @@ body {
     width: 80%;
 }
 
+.admin-login-button {
+    color: black !important;
+    padding: 0px 30px !important;
+    border: 3px solid #EDD93A !important;
+    width: 80%;
+    margin-top: 30px;
+}
+
 .button-center {
     text-align: center;
 }

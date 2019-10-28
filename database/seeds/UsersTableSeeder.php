@@ -26,8 +26,7 @@ class UsersTableSeeder extends Seeder
             'address' => $faker->address,
             'user_image' => 'Mask Group 1.png',
             'instagram' => $faker->username,
-            'password' => Hash::make('1234567'),
-            'role_id' => 1
+            'password' => Hash::make('1234567')
         ]);
 
         User::create([
@@ -37,9 +36,7 @@ class UsersTableSeeder extends Seeder
             'address' => $faker->address,
             'user_image' => 'Mask Group 1.png',
             'instagram' => $faker->username,
-            'password' => Hash::make('1234567'),
-            'role_id' => 3
-        ]);
-        
+            'password' => Hash::make('1234567')
+        ]); 
     }
 }
