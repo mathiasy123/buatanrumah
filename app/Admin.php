@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone_call', 'address', 'user_image', 'instagram', 'password'
+        'name', 'email', 'password'
     ];
 
     /**
@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
+     /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -36,24 +36,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    /**
-     * Set the User and Food relation.
-     *
-     * One to Many Relation (User => Foods)
-     */
-    public function foods()
-    {
-        return $this->belongsTo('App\Food');
-    }
-
-    /**
-     * Set the User and Order relation.
-     *
-     * One to Many Relation (User => Orders)
-     */
-    public function orders()
-    {
-        return $this->belongsTo('App\Order');
-    }
 }

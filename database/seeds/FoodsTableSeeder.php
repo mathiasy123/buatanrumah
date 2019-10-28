@@ -20,7 +20,7 @@ class FoodsTableSeeder extends Seeder
         foreach(range(0, 10) as $iteration) {
 
             Food::create([
-                'user_id' => $faker->numberBetween(1, 12),
+                'user_id' => $faker->numberBetween(1, 2),
                 'food_name' => $faker->word,
                 'rating' => $faker->numberBetween(1, 10),
                 'description' => $faker->text($maxNbChars = 50),

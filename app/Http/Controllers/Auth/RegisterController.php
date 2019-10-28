@@ -65,8 +65,7 @@ class RegisterController extends Controller
             'name' => strtolower(strip_tags($request->nama_user)),
             'email' => strtolower($request->email),
             'phone_call' => $request->nomor_telepon,
-            'password' => Hash::make($request->password),
-            'role_id' => 1
+            'password' => Hash::make($request->password)
         ]);
 
         return redirect('/login')->with('registered', 'Anda telah berhasil membuat akun, silahkan masuk aplikasi');

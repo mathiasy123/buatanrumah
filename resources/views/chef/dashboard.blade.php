@@ -85,8 +85,8 @@
                 <table class="table is-hoverable is-fullwidth">
                     <thead>
                         <th>#</th>
-                        <th>Kode Order</th>
-                        <th>Tanggal Order</th>
+                        <th>Kode Pemesanan</th>
+                        <th>Tanggal Pemesanan</th>
                     </thead>
                     <tbody>
 

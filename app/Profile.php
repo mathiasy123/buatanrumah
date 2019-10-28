@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Food extends Model
+class Profile extends Model
 {
-
-    /**
+     /**
      * Indicates if the food model should be timestamped.
      *
      * @var bool
@@ -19,12 +18,12 @@ class Food extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'food_name', 'rating', 'description', 'image'];
+    protected $fillable = ['user_id', 'food_id', 'about'];
 
     /**
-     * Set the Food and User relation.
+     * Set the Profile and User relation.
      *
-     * Many to One Relation (Foods => User)
+     * One to One Relation (Profile => User)
      */
     public function user()
     {
@@ -32,12 +31,12 @@ class Food extends Model
     }
 
     /**
-     * Set the Food and Order relation.
+     * Set the Profile and Food relation.
      *
-     * One to One Relation (Food => Order)
+     * One to Many Relation (Food => Order)
      */
-    public function order()
+    public function foods()
     {
-        return $this->belongsTo('App\Order');
+        return $this->hasMany('App\Food');
     }
 }
