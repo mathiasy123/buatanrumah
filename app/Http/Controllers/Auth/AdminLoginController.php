@@ -29,12 +29,7 @@ class AdminLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-    }
-
-    public function guard()
-    {
-        return auth()->guard('admin');
+        $this->middleware('guest:admin')->except('logout', 'adminLogout');
     }
 
     /**
@@ -45,6 +40,11 @@ class AdminLoginController extends Controller
     public function showLoginForm()
     {
         return view('auth/admin_login');
+    }
+
+    public function guard()
+    {
+        return auth()->guard('admin');
     }
 
     /**
@@ -106,5 +106,18 @@ class AdminLoginController extends Controller
         return $this->guard('admin')->attempt(
             $this->credentials($request), $request->filled('remember')
         );
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function adminLogout()
+    {
+        auth()->guard('admin')->logout();
+
+        return redirect('/admin/login');
     }
 }

@@ -56,7 +56,7 @@ class RegisterController extends Controller
     {
         $request->validate([
             'nama_user' => 'required|string|max:50',
-            'email' => 'required|email:rfc,strict|max:50',
+            'email' => 'required|unique:users,email|email:rfc,strict|max:50',
             'nomor_telepon' => 'required|numeric|digits_between:9,15',
             'password' => 'required|string|min:5|confirmed'
         ]);

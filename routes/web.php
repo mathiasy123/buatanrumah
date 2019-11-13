@@ -12,11 +12,6 @@
 */
 
 /**
- * Vendor Buatan Rumah Route
- */
-Route::get('/', 'VendorController@index');
-
-/**
  * Registration Routes
  */
 Route::prefix('register')->group(function () {
@@ -31,6 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm');
     Route::post('/login', 'Auth\AdminLoginController@login');
     Route::get('/', 'AdminController@index');
+    Route::get('/logout', 'Auth\AdminLoginController@adminLogout');
 });
 
 /**
@@ -38,13 +34,8 @@ Route::prefix('admin')->group(function () {
  */
 Route::prefix('login')->group(function () {
     Route::get('/', 'Auth\LoginController@showLoginForm');
-    Route::post('/', 'Auth\LoginController@login');
+    Route::post('/', 'Auth\LoginController@Login');
 });
-
-/**
- * Logout Route
- */
-Route::get('/logout', 'Auth\LoginController@logout');
 
 /**
  * Chef's Profile Routes
@@ -56,9 +47,17 @@ Route::prefix('profile')->group(function () {
 });
 
 /**
- * Chef's Dashboard Routes
+ * Logout Routes
  */
-Route::get('/chef', 'UserController@index');
+Route::get('/logout', 'Auth\LoginController@userLogout');
+
+/**
+ * Chef's Routes
+ */
+Route::prefix('chef')->group(function () {
+    Route::get('/', 'UserController@index');
+
+});
 
 /**
  * Order Routes
@@ -75,5 +74,9 @@ Route::prefix('order')->group(function () {
  */
 Route::get('/food', 'FoodController@index');
 
+/**
+ * Vendor Buatan Rumah Route
+ */
+Route::get('/', 'VendorController@index');
 
 

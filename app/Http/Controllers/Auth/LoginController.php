@@ -37,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout', 'userLogout');
     }
 
     /**
@@ -62,12 +62,10 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+    public function userLogout()
     {
-        $this->guard()->logout();
+        auth()->guard('web')->logout();
 
-        $request->session()->invalidate();
-
-        return $this->loggedOut($request) ?: redirect('/login');
+        return redirect('/login');
     }
 }
