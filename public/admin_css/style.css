@@ -1,0 +1,47 @@
+/* Global Style */
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Sidebar Style */
+.upper-sidebar {
+    margin-top: 20px;;
+}
+
+.sidebar {
+    margin-left: 30px;;
+}
+
+/* Table Data Style */
+.table-space {
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* Panel Style */
+.panel-admin {
+    margin-top: 40px;
+}
+
+/* Footer Style */
+.footer {
+    border-top: 30px solid #A3B40E;
+    background-color: #292C3F;
+}
+
+.text-copyright {
+    text-align: center;
+}
+
+/* Desktop Version */
+@media (min-width: 1024px) and (max-width: 1408px) {
+
+    
+}
+
+/* Mobile Version */
+@media (min-width: 320px) and (max-width: 1024px) {
+
+    
+
+}
