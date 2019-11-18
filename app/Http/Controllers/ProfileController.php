@@ -23,7 +23,7 @@ class ProfileController extends Controller
 
         $foods = Food::where('user_id', $user_id)
                     ->when($request->food_keyword, function($query) use($request){
-                        $query->where('food_name', 'like', '%' . strip_tags($request->food_keyword) . '%')
+                        $query->where('name', 'like', '%' . strip_tags($request->food_keyword) . '%')
                         ->orWhere('rating', $request->food_keyword)
                         ->orWhere('price', $request->food_keyword);
                     })
@@ -32,8 +32,11 @@ class ProfileController extends Controller
         $foods->appends($request->only('food_keyword'));
 
         if(count($foods)) {
+
             return view('chef.profile', compact('foods'));
+
         }else {
+            
             session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
             
             return view('chef.profile', compact('foods'));

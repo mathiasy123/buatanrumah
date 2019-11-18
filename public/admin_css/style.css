@@ -1,6 +1,12 @@
 /* Global Style */
 * {
+    margin: 0;
+    padding: 0;
     font-family: 'Montserrat', sans-serif;
+}
+html,
+body {
+  height: 100%;
 }
 
 /* Icon Style */
@@ -43,6 +49,12 @@
     transform: translateX(0%);
 }
 
+/* Content Style */
+.content {
+    min-height: 100%; 
+    overflow: auto;
+}
+
 /* Table Style */
 .table-data {
     margin-bottom: 50px;
@@ -50,11 +62,13 @@
 
 /* Footer Style */
 .footer {
+    position: relative;
+    height: 100px;
+    clear: both;
     border-top: 30px solid #A3B40E;
     background-color: #292C3F;
 }
 .text-copyright {
-   
     text-align: center;
 }
 
@@ -79,5 +93,11 @@
     .menu-container {
         transform: translateX(-100%);
         transition: all ease 0.5s;
+    }
+
+    /* Button Style */
+    .is-fullwidth-mobile {
+        display: flex;
+        width: 100%;
     }
 }

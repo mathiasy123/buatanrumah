@@ -33,15 +33,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        $user = auth('web')->user();
 
         $count_order = Order::where('user_id', $user->id)->count();
 
         $count_food = Food::where('user_id', $user->id)->count();
 
-        $orders = Order::where('user_id', $user->id)->limit(10)->get();
+        $orders = Order::where('user_id', $user->id)->take(10)->get();
 
-        $foods = Food::where('user_id', $user->id)->limit(10)->get();
+        $foods = Food::where('user_id', $user->id)->take(10)->get();
 
         return view('chef.dashboard', compact('count_order', 'count_food', 'orders', 'foods'));
     }

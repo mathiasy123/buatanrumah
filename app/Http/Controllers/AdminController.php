@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class AdminController extends Controller
 {
     /**
@@ -23,7 +25,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $chefs = User::all()->take(10);
+        
+        $count_chef = User::all()->count();
+
+        return view('admin.dashboard', compact('chefs', 'count_chef'));
     }
 
     /**
@@ -31,9 +37,36 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function chef()
-    {
-        return view('admin.chef');
+    public function chef(Request $request)
+    {   
+        session()->forget('chef_not_found');
+
+        $request->validate([
+            'chef_keyword' => 'nullable'
+        ]);
+
+        $chefs = User::when($request->chef_keyword, function($query) use($request){
+                        $query->where('name', 'like', '%' . strip_tags($request->chef_keyword) . '%')
+                        ->orWhere('email', 'like', '%' . strip_tags($request->chef_keyword) . '%')
+                        ->orWhere('phone_call', 'like', '%' . strip_tags($request->chef_keyword) . '%')
+                        ->orWhere('address', 'like', '%' . strip_tags($request->chef_keyword) . '%')
+                        ->orWhere('instagram', 'like', '%' . strip_tags($request->chef_keyword) . '%');
+                    })
+                    ->latest()
+                    ->paginate(6);
+
+        $chefs->appends($request->only('chef_keyword'));
+
+        if(count($chefs)) {
+
+            return view('admin.chef', compact('chefs'));
+
+        } else {
+            
+            session()->flash('chef_not_found', 'Maaf, akun pemasak yang Anda dicari tidak ada');
+            
+            return view('admin.chef', compact('chefs'));
+        }
     }
 
     /**

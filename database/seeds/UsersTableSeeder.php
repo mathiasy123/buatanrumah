@@ -19,24 +19,16 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        User::create([
-            'name' => $faker->name,
-            'email' => $faker->email,
-            'phone_call' => '08999111697',
-            'address' => $faker->address,
-            'user_image' => 'Mask Group 1.png',
-            'instagram' => $faker->username,
-            'password' => Hash::make('1234567')
-        ]);
-
-        User::create([
-            'name' => $faker->name,
-            'email' => $faker->email,
-            'phone_call' => '08999000697',
-            'address' => $faker->address,
-            'user_image' => 'Mask Group 1.png',
-            'instagram' => $faker->username,
-            'password' => Hash::make('1234567')
-        ]); 
+        for($count = 1; $count <= 20; $count++) {
+            User::create([
+                'name' => $faker->name,
+                'email' => $faker->email,
+                'phone_call' => '08999111697',
+                'address' => $faker->address,
+                'user_image' => 'Mask Group 1.png',
+                'instagram' => $faker->username,
+                'password' => Hash::make('1234567')
+            ]);
+        }
     }
 }
