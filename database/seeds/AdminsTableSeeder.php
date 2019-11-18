@@ -22,7 +22,7 @@ class AdminsTableSeeder extends Seeder
         Admin::create([
             'name' => $faker->name,
             'email' => $faker->email,
-            'password' => Hash::make('password')
+            'password' => Hash::make('doraxmachadmin123')
         ]);
         
     }

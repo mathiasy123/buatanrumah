@@ -1,50 +1,50 @@
 @extends('admin_layout.master')
 
-@section('title', 'Admin CMS | Kelola Akun Pemasak')
+@section('title', 'Admin CMS | Kelola Akun Re-Seller')
 
 @section('admin_content')
 <div class="content">
     <div class="column is-10-desktop is-offset-2-desktop is-9-tablet is-offset-3-tablet is-12-mobile">
         <div class="p-1">
             
-            <!-- Title Chef Account Table -->
+            <!-- Title Re-Seller Account Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
-                    <h1 class="title">Data Akun Pemasak</h1>
+                    <h1 class="title">Data Akun Re-Seller</h1>
                 </div>
             </div>
-            <!-- End Title Chef Account Table -->
+            <!-- End Title Re-Seller Account Table -->
 
-            <!-- Search Chef Account Table -->
+            <!-- Search Re-Seller Account Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column is-9-desktop is-12-mobile">
                     <form method="post" action="{{ url()->current() }}">
                         @csrf
                         <div class="control has-icons-right">
-                            <input class="input is-medium @error('chef_keyword') is-danger @enderror" name="chef_keyword" type="text" placeholder="Cari Akun Pemasak">
+                            <input class="input is-medium @error('reseller_keyword') is-danger @enderror" name="reseller_keyword" type="text" placeholder="Cari Akun Pemasak">
                             <span class="icon is-right">
                                 <i class="fas fa-search"></i>
                             </span>
 
-                            @error('chef_keyword')
+                            @error('reseller_keyword')
                             <p class="help is-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </form>
                 </div>
                 <div class="column is-2-desktop is-12-mobile">
-                    <a href="/admin/pemasak" class="button reset-button is-danger is-rounded is-fullwidth-mobile is-medium">Reset Pencarian</a>
+                    <a href="/admin/re-seller" class="button reset-button is-danger is-rounded is-fullwidth-mobile is-medium">Reset Pencarian</a>
                 </div>
             </div>
-            <!-- End Search Chef Account Table -->
+            <!-- End Search Re-Seller Account Table -->
 
-            <!-- Chef Account Table -->
+            <!-- Re-Seller Account Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
-                    @if(session('order_not_found'))
+                    @if(session('reseller_not_found'))
 
                     <div class="content">
-                        <h3 class="has-text-centered flash-message">-- {{ @session('chef_not_found') }} --</h3>
+                        <h3 class="has-text-centered flash-message">-- {{ @session('reseller_not_found') }} --</h3>
                     </div>
 
                     @else
@@ -53,36 +53,34 @@
                         <table class="table table-data is-hoverable is-fullwidth">
                             <thead>
                                 <th>#</th>
-                                <th>Nama Pemasak</th>
-                                <th>Foto Pemasak</th>
-                                <th>E-mail Pemasak</th>
-                                <th>Nomor Telepon Pemasak</th>
-                                <th>Alamat Pemasak</th>
-                                <th>Instagram Pemasak</th>
+                                <th>Nama Re-Seller</th>
+                                <th>Foto Re-Seller</th>
+                                <th>E-mail Re-Seller</th>
+                                <th>Nomor Telepon Re-Seller</th>
+                                <th>Alamat Re-Seller</th>
                             </thead>
                             <tbody>
                                 
-                                @foreach($chefs as $index => $chef)
+                                @foreach($resellers as $index => $reseller)
                                 <tr>
-                                    <td>{{ $index + $chefs->firstItem() }}</td>
-                                    <td>{{ ucwords($chef->name) }}</td>
+                                    <td>{{ $index + $resellers->firstItem() }}</td>
+                                    <td>{{ ucwords($reseller->name) }}</td>
 
-                                    @if($chef->user_image == '')
+                                    @if($reseller->reseller_image == '')
 
                                     <td>-----</td>
 
                                     @else
 
                                     <td>
-                                        <img src="{{ asset('chef_images/frontend/' . $chef->user_image) }}" width="150" height="140" alt="Foto Pemasak">
+                                        <img src="{{ asset('reseller_images/frontend/' . $reseller->reseller_image) }}" width="150" height="140" alt="Foto Pemasak">
                                     </td>
 
                                     @endif
 
-                                    <td>{{ $chef->email }}</td>
-                                    <td>{{ ($chef->phone_call == '') ? '-----' :  $chef->phone_call }}</td>
-                                    <td>{{ ($chef->address == '') ? '-----' : ucwords($chef->address) }}</td>
-                                    <td>{{ ($chef->instagram == '') ? '-----' : $chef->instagram }}</td>
+                                    <td>{{ $reseller->email }}</td>
+                                    <td>{{ ($reseller->phone_call == '') ? '-----' :  $reseller->phone_call }}</td>
+                                    <td>{{ ($reseller->address == '') ? '-----' : ucwords($reseller->address) }}</td>
                                 </tr>
                                 @endforeach
 
@@ -90,13 +88,13 @@
                         </table>
                     </div>
 
-                    {{ $chefs->links() }}
+                    {{ $resellers->links() }}
 
                     @endif
 
                 </div>
             </div>
-            <!-- End Chef Account Table -->
+            <!-- End Re-Seller Account Table -->
 
         </div>
     </div>

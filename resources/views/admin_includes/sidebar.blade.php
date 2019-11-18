@@ -14,7 +14,7 @@
                         <li>
                             <ul>
                                 <li>
-                                    <a href="/admin">
+                                    <a href="/admin" class="{{ (request()->is('admin')) ? 'is-active' : ''}}">
                                         <i class="fas fa-tachometer-alt icon"></i>  Dashboard
                                     </a>
                                 </li>
@@ -30,12 +30,12 @@
                         <li>
                             <ul>
                                 <li>
-                                    <a href="/admin/pemasak">
+                                    <a href="/admin/pemasak" class="{{ (request()->is('admin/pemasak')) ? 'is-active' : ''}}">
                                         <i class="fas fa-utensils icon"></i> Kelola Akun Pemasak
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/re-seller">
+                                    <a href="/admin/re-seller" class="{{ (request()->is('admin/re-seller')) ? 'is-active' : ''}}">
                                         <i class="fas fa-universal-access icon"></i> Kelola Akun Re-Seller
                                     </a>
                                 </li>

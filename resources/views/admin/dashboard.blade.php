@@ -89,11 +89,11 @@
                                 @foreach($chefs as $chef)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $chef->name }}</td>
+                                    <td>{{ ucwords($chef->name) }}</td>
                                     <td>{{ $chef->email }}</td>
-                                    <td>{{ $chef->phone_call }}</td>
-                                    <td>{{ $chef->address }}</td>
-                                    <td>{{ $chef->instagram }}</td>
+                                    <td>{{ ($chef->phone_call == '') ? '-----' :  $chef->phone_call }}</td>
+                                    <td>{{ ($chef->address == '') ? '-----' : ucwords($chef->address) }}</td>
+                                    <td>{{ ($chef->instagram == '') ? '-----' : $chef->instagram }}</td>
                                 </tr>
                                 @endforeach
 

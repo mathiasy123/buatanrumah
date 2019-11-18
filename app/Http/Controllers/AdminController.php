@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use App\ReSeller;
+
 class AdminController extends Controller
 {
     /**
@@ -25,9 +27,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $chefs = User::all()->take(10);
+        $chefs = User::latest()->take(10)->get();
         
-        $count_chef = User::all()->count();
+        $count_chef = User::count();
 
         return view('admin.dashboard', compact('chefs', 'count_chef'));
     }
@@ -74,9 +76,35 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function reSeller()
+    public function reSeller(Request $request)
     {
-        return view('admin.re_seller');
+        session()->forget('reseller_not_found');
+
+        $request->validate([
+            'chef_keyword' => 'nullable'
+        ]);
+
+        $resellers = ReSeller::when($request->reseller_keyword, function($query) use($request){
+                        $query->where('name', 'like', '%' . strip_tags($requesreseller) . '%')
+                        ->orWhere('email', 'like', '%' . strip_tags($requesreseller) . '%')
+                        ->orWhere('phone_call', 'like', '%' . strip_tags($requesreseller) . '%')
+                        ->orWhere('address', 'like', '%' . strip_tags($requesreseller) . '%');
+                    })
+                    ->latest()
+                    ->paginate(6);
+
+        $resellers->appends($request->only('reseller_keyword'));
+
+        if(count($resellers)) {
+
+            return view('admin.re_seller', compact('resellers'));
+
+        } else {
+            
+            session()->flash('reseller_not_found', 'Maaf, akun re-seller yang Anda dicari tidak ada');
+            
+            return view('admin.re_seller', compact('resellers'));
+        }
     }
 
     /**
