@@ -1,5 +1,3 @@
 {
-    "explorer.openEditors.visible": 0,
-    "editor.minimap.enabled": false,
-    "editor.fontSize": 16
+    "editor.minimap.enabled": false
 }

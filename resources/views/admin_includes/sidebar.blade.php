@@ -1,43 +1,90 @@
-<aside class="menu">
+<div class="columns is-variable is-0">
 
-    <p class="menu-label sidebar upper-sidebar">
-        Informasi Pengguna
-    </p>
-    <ul class="menu-list sidebar">
-        <li><a>Login: Admin</a></li>
-        <li><a>Role: CMS Buatan Rumah</a></li>
-        <li><a>Terdaftar: 1 September 2019</a></li>
-    </ul>
-    
-    <p class="menu-label sidebar">
-        Kelola Pengguna
-    </p>
-    <ul class="menu-list sidebar">
-        <li><a>Akun Pemasak</a></li>
-        <li><a>Akun Re-seller</a></li>
-    </ul>
+    <!-- Menu Sidebar Section -->
+    <div>
+        <div class="menu-container px-1 has-background-white">
 
-    <p class="menu-label sidebar">
-        Kelola Konten
-    </p>
-    <ul class="menu-list sidebar">
-        <li><a>Data Kontent Buatan Rumah</a></li>
-        <li><a>Data Kontent Profile Pemasak</a></li>
-    </ul>
+            <!-- Menu Dashboard Section -->
+            <div class="menu-wrapper py-1">
+                <aside class="menu">
+                    <p class="menu-label">
+                        Menu Utama
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="/admin">
+                                        <i class="fas fa-tachometer-alt icon"></i>  Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                        </li>
+                    </ul>
 
-    <p class="menu-label sidebar">
-        Kelola Makanan
-    </p>
-    <ul class="menu-list sidebar">
-        <li><a>Data Makanan Pemasak</a></li>
-    </ul>
+                    <p class="menu-label">
+                        Menu Akun
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="/admin/pemasak">
+                                        <i class="fas fa-utensils icon"></i> Kelola Akun Pemasak
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/re-seller">
+                                        <i class="fas fa-universal-access icon"></i> Kelola Akun Re-Seller
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-    <p class="menu-label sidebar">
-        Akses Aplikasi
-    </p>
-    <ul class="menu-list sidebar">
-        <li><a href="/admin/logout">Keluar</a></li>
-    </ul>
+                    <p class="menu-label">
+                        Menu Konten
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="/admin/buatanrumah">
+                                        <i class="fas fa-id-badge icon"></i> Kelola Konten Umum
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/pemasak-profile">
+                                        <i class="fas fa-id-card icon"></i> Kelola Konten Profile
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-</aside>
+                    <p class="menu-label">
+                        Menu Makanan
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="/admin/pemasak-makanan">
+                                        <i class="fas fa-bread-slice icon"></i> Kelola Makanan Pemasak
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+            <!-- End Menu Dashboard Section -->
+
+        </div>
+    </div>
+    <!-- End Menu Sidebar Section -->
+
+</div>
+
 

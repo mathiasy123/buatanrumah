@@ -26,6 +26,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm');
     Route::post('/login', 'Auth\AdminLoginController@login');
     Route::get('/', 'AdminController@index');
+    Route::get('/pemasak', 'AdminController@chef');
+    Route::get('/re-seller', 'AdminController@reSeller');
+    Route::get('/buatanrumah', 'AdminController@buatanRumah');
+    Route::get('/pemasak-profile', 'AdminController@chefProfile');
+    Route::get('/pemasak-makanan', 'AdminController@chefFood');
     Route::get('/logout', 'Auth\AdminLoginController@adminLogout');
 });
 

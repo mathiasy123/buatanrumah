@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Food;
+
 class ProfileController extends Controller
 {
     /**
@@ -11,7 +13,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $user_id)
     {
         session()->forget('food_not_found');
 

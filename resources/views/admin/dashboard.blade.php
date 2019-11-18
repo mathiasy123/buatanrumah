@@ -3,145 +3,148 @@
 @section('title', 'Admin CMS | Dashboard')
 
 @section('admin_content')
-<!-- Panel Section -->
-<section class="setion panel-admin" id="panel-admin">
-    <div class="container is-fluid">
-        <div class="columns">
+<div class="column is-10-desktop is-offset-2-desktop is-9-tablet is-offset-3-tablet is-12-mobile">
+    <div class="p-1">
+        
+        <!-- Title Dashboard Section  -->
+        <div class="columns is-variable is-desktop">
             <div class="column">
-                <div class="box has-background-success">
-                    <div class="columns is-gapless is-mobile">
-                        <div class="column">
-                            <i class="fas fa-users fa-4x has-text-light"></i>
+                <h1 class="title">Panel Data</h1>
+            </div>
+        </div>
+        <!-- End Title Dashboard Section  -->
+
+        <!-- Panel Dashboard Section  -->
+        <div class="columns is-variable is-desktop">
+            <div class="column">
+                <div class="card has-background-primary has-text-white">
+                    <div class="card-header">
+                        <div class="card-header-title has-text-white">
+                            Data Akun Pemasak
                         </div>
-                        <div class="column has-text-light">
-                            <h3 class="is-size-5"><b>Pemasak</b></h3>
-                            <p class="is-size-5">Total : 1</p>
-                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="is-size-3">Total: 1000</p>
                     </div>
                 </div>
             </div>
             <div class="column">
-                <div class="box has-background-success">
-                    <div class="columns is-gapless is-mobile">
-                        <div class="column">
-                            <i class="fas fa-user-tie fa-4x has-text-light"></i>
+                <div class="card has-background-danger has-text-white">
+                    <div class="card-header">
+                        <div class="card-header-title has-text-white">
+                            Data Akun Re-Seller
                         </div>
-                        <div class="column has-text-light">
-                            <h3 class="is-size-5"><b>Reseller</b></h3>
-                            <p class="is-size-5">Total : 1</p>
-                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="is-size-3">Total: 1000</p>
                     </div>
                 </div>
             </div>
             <div class="column">
-                <div class="box has-background-success">
-                    <div class="columns is-gapless is-mobile">
-                        <div class="column">
-                            <i class="fas fa-id-card fa-4x has-text-light"></i>
+                <div class="card has-background-info has-text-white">
+                    <div class="card-header">
+                        <div class="card-header-title has-text-white">
+                            Data Profile Pemasak
                         </div>
-                        <div class="column has-text-light">
-                            <h3 class="is-size-5"><b>Profile</b></h3>
-                            <p class="is-size-5">Total : 1</p>
-                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="is-size-3">Total: 1000</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- End Panel Section -->
+        <!-- End Panel Dashboard Section  -->
 
-<!-- Tabel Data Section -->
-<section class="section tabel-data" id="tabel-data">
-    <div class="container is-fluid">
-
-            <div class="column is-12">
-                <h5 class="is-size-5 is-pulled-left">Data Akun Pemasak</h5>
-                <a href="" class="button overview-detail is-link is-rounded is-pulled-right">Lihat Lebih Detail</a>
-                <table class="table table-space is-hoverable is-fullwidth">
-                    <thead>
-                        <th>#</th>
-                        <th>Email Pemasak</th>
-                        <th>Nama Pemasak</th>
-                        <th>Nomor Telepon Pemasak</th>
-                        <th>Alamat Pemasak</th>
-                    </thead>
-                    <tbody>
- 
-                        <tr>
-                            <td>1</td>
-                            <td>andi@gmail.com</td>
-                            <td>Andi</td>
-                            <td>089825234</td>
-                            <td>Jln Bekasi Timur</td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
+        <!-- Title Chef Account Table -->
+        <div class="columns is-variable is-desktop">
+            <div class="column">
+                <div class="level">
+                    <div class="level-left">
+                        <h1 class="title">Data Akun Pemasak</h1>
+                    </div>
+                    <div class="level-right">
+                        <a href="/admin/pemasak" class="button overview-detail is-link is-rounded">Lihat Lebih Detail</a>
+                    </div>
+                </div>
             </div>
+        </div>
+        <!-- End Title Chef Account Table -->
 
-    </div>
-</section>
-<!-- End Tabel Data Section -->
+        <!-- Chef Account Table -->
+        <div class="columns is-variable is-desktop">
+            <div class="column">
+                <div class="table-container">
+                    <table class="table table-data is-hoverable is-fullwidth">
+                        <thead>
+                            <th>#</th>
+                            <th>Nama Pemasak</th>
+                            <th>E-mail Pemasak</th>
+                            <th>Nomor Telepon Pemasak</th>
+                            <th>Alamat Pemasak</th>
+                            <th>Instagram Pemasak</th>
+                        </thead>
+                        <tbody>
 
-<!-- Tabel Data Section -->
-<section class="section tabel-data" id="tabel-data">
-    <div class="container is-fluid">
-            <div class="column is-12">
-                <h5 class="is-size-5 is-pulled-left">Data Akun Reseller</h5>
-                <a href="" class="button overview-detail is-link is-rounded is-pulled-right">Lihat Lebih Detail</a>
-                <table class="table table-space is-hoverable is-fullwidth">
-                    <thead>
-                        <th>#</th>
-                        <th>Email Reseller</th>
-                        <th>Nama Reseller</th>
-                        <th>Nomor Telepon Reseller</th>
-                        <th>Alamat Reseller</th>
-                    </thead>
-                    <tbody>
- 
-                        <tr>
-                            <td>1</td>
-                            <td>andi@gmail.com</td>
-                            <td>Andi</td>
-                            <td>089825234</td>
-                            <td>Jln Bekasi Timur</td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-    </div>
-</section>
-<!-- End Tabel Data Section -->
+        </div>
+        <!-- End Chef Account Table -->
 
-<!-- Tabel Data Section -->
-<section class="section tabel-data" id="tabel-data">
-    <div class="container is-fluid">
-            <div class="column is-12">
-                <h5 class="is-size-5 is-pulled-left">Data Konten Profile</h5>
-                <a href="" class="button overview-detail is-link is-rounded is-pulled-right">Lihat Lebih Detail</a>
-                <table class="table table-space is-hoverable is-fullwidth">
-                    <thead>
-                        <th>#</th>
-                        <th>Gambar Banner</th>
-                        <th>Judul Banner</th>
-                        <th>Foto Pemasak</th>
-                    </thead>
-                    <tbody>
- 
-                        <tr>
-                            <td>1</td>
-                            <td>andi@gmail.com</td>
-                            <td>Andi</td>
-                            <td>Andi</td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
+        <!-- Title Re-seller Account Table -->
+        <div class="columns is-variable is-desktop">
+            <div class="column">
+                <div class="level">
+                    <div class="level-left">
+                        <h1 class="title">Data Akun Re-Seller</h1>
+                    </div>
+                    <div class="level-right">
+                        <a href="/admin/re-seller" class="button overview-detail is-link is-rounded">Lihat Lebih Detail</a>
+                    </div>
+                </div>
             </div>
+        </div>
+        <!-- End Title Re-seller Account Table -->
+
+        <!-- Re-seller Account Table -->
+        <div class="columns is-variable is-desktop">
+            <div class="column">
+                <div class="table-container">
+                    <table class="table table-data is-hoverable is-fullwidth">
+                        <thead>
+                            <th>#</th>
+                            <th>Nama Re-Seller</th>
+                            <th>E-mail Re-Seller</th>
+                            <th>Nomor Telepon Re-Seller</th>
+                            <th>Alamat Re-Seller</th>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- End Re-seller Account Table -->
 
     </div>
-</section>
-<!-- End Tabel Data Section -->
+</div>
 @endsection
+

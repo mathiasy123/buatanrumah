@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="home">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
     @include('admin_includes.header')
@@ -9,31 +9,31 @@
 
 <body>
 
-    <div class="columns is-mobile">
-        <div class="column is-3 is-three-fifths-mobile">
-            <!-- Sidebar Section -->
-            @include('admin_includes.sidebar')
-            <!-- End Sidebar Section -->
-        </div>
-        <div class="column is-9">
-            <!-- Admin Dashboard Section -->
-            @yield('admin_content')
-            <!-- End Admin Dashboard Section -->
-        </div>
-    </div>
+    <!-- Navbar Section -->
+    @include('admin_includes.navbar')
+    <!-- End NavbarSection -->
+
+    <!-- Sidebar Section -->
+    @include('admin_includes.sidebar')
+    <!-- End Sidebar Section -->
+
+    <!-- Dashboard Content Section -->
+    @yield('admin_content')
+    <!-- End Dashboard Content Section -->
 
     <!-- Footer Section -->
-    <footer class="footer" id="footer">
-        @include('admin_includes.footer')
-    </footer>
+    @include('admin_includes.footer')
     <!-- End Footer Section -->
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
+    <!-- Nice Scroll PLuggin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 
-    <!-- Own Javascript -->
-    <script src="{{ asset('vendor_js/script.js') }}"></script>
+    <!-- Nice Scroll PLuggin -->
+    <script src="{{ asset('admin_js/script.js') }}"></script>
 </body>
 
 </html>
