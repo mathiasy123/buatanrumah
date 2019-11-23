@@ -8,6 +8,8 @@ use App\User;
 
 use App\ReSeller;
 
+use App\VendorContent;
+
 class AdminController extends Controller
 {
     /**
@@ -28,10 +30,14 @@ class AdminController extends Controller
     public function index()
     {
         $chefs = User::latest()->take(10)->get();
+
+        $resellers = ReSeller::latest()->take(10)->get();
         
         $count_chef = User::count();
 
-        return view('admin.dashboard', compact('chefs', 'count_chef'));
+        $count_reseller = ReSeller::count();
+
+        return view('admin.dashboard', compact('chefs', 'count_chef', 'resellers', 'count_reseller'));
     }
 
     /**
@@ -114,7 +120,9 @@ class AdminController extends Controller
      */
     public function buatanRumah()
     {
-        return view('admin.buatan_rumah');
+        $content = VendorContent::first();
+
+        return view('admin.buatan_rumah', compact('content'));
     }
 
     /**

@@ -39,7 +39,7 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         <a href="/register" class="login-button button is-outlined is-warning is-rounded">
-                            <strong>Jadi Anggota Kami</strong>
+                            <strong>Daftar</strong>
                         </a>
                     </div>
                 </div>

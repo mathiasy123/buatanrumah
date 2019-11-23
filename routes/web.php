@@ -29,7 +29,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/pemasak', 'AdminController@chef');
     Route::post('/pemasak', 'AdminController@chef');
     Route::get('/re-seller', 'AdminController@reSeller');
-    Route::get('/buatanrumah', 'AdminController@buatanRumah');
+
+    Route::prefix('buatan-rumah')->group(function () {
+        Route::get('/', 'AdminController@buatanRumah');
+        Route::put('/', 'VendorContentController@update');
+        Route::get('/{content}', 'VendorContentController@edit');
+    });
+    
     Route::get('/pemasak-profile', 'AdminController@chefProfile');
     Route::get('/pemasak-makanan', 'AdminController@chefFood');
     Route::get('/logout', 'Auth\AdminLoginController@adminLogout');
@@ -62,7 +68,6 @@ Route::get('/logout', 'Auth\LoginController@userLogout');
  */
 Route::prefix('chef')->group(function () {
     Route::get('/', 'UserController@index');
-
 });
 
 /**

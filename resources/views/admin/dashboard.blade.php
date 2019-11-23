@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="card-content">
-                            <p class="is-size-3">Total: 1000</p>
+                            <p class="is-size-3">Total: {{ $count_reseller }}</p>
                         </div>
                     </div>
                 </div>
@@ -133,13 +133,15 @@
                             </thead>
                             <tbody>
 
+                                @foreach($resellers as $reseller)
                                 <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ucwords($reseller->name) }}</td>
+                                    <td>{{ $reseller->email }}</td>
+                                    <td>{{ ($reseller->phone_call == '') ? '-----' :  $reseller->phone_call }}</td>
+                                    <td>{{ ($reseller->address == '') ? '-----' : ucwords($reseller->address) }}</td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

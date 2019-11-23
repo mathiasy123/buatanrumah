@@ -9,7 +9,6 @@
     padding: 0px 30px !important;
     border: 3px solid #EDD93A !important;
 }
-
 .button-more {
     text-align: center;
     margin-top: 80px;
@@ -26,12 +25,17 @@
     box-shadow: 2px 2px 4px;
 }
 
+/* Section Style */
+.hero-text,
+.tentang-text {
+    word-break: break-word;
+}
+
 /* Footer Style */
 .footer {
     border-top: 30px solid #A3B40E;
     background-color: #292C3F;
 }
-
 .text-copyright {
     text-align: center;
     margin-top: 50px;
@@ -58,10 +62,11 @@
     .title-hero-2 {
         margin-top: 60px;
     }
-
     .hero-text {
+        word-break: break-word;
         margin-top: 50px;
         margin-bottom: 40px;
+        margin-right: 40px;
         font-size: 20px;
     }
 
@@ -70,8 +75,8 @@
         margin: 30px 20px 0px;
         text-align: center;
     }
-
     .tentang-text {
+        word-break: break-word;
         margin-top: 30px;
         margin-bottom: 50px;
     }

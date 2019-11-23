@@ -6,7 +6,16 @@
 }
 html,
 body {
-  height: 100%;
+    height: 100%;
+}
+span {
+    padding-right: 5px;
+}
+hr {
+    background-color: rgb(212, 198, 198);
+}
+.wrap-text {
+    word-break: break-word;
 }
 
 /* Icon Style */
@@ -26,7 +35,7 @@ body {
 /* Sidebar Style */
 .px-1,
 .p-1 {
-   padding-left: 0.75rem; 
+    padding-left: 0.75rem; 
 }
 .py-1,
 .p-1 {
@@ -73,7 +82,7 @@ body {
 }
 
 /* Desktop Version */
-@media (min-width: 1024px) and (max-width: 1408px) {
+@media (min-width: 1000px) and (max-width: 1408px) {
     /* Sidebar Style */
     .menu-container {
         width: 16%;
@@ -88,7 +97,7 @@ body {
 }
 
 /* Mobile Version */
-@media (min-width: 320px) and (max-width: 1024px) {
+@media (min-width: 320px) and (max-width: 1000px) {
     /* Sidebar Style */
     .menu-container {
         transform: translateX(-100%);

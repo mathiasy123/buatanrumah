@@ -82,8 +82,8 @@ return [
         'string' => 'Field :attribute tidak boleh lebih dari :max huruf.',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
-    'mimetypes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => 'Konten :attribute harus berupa ekstensi atau format video (mp4).',
+    'mimetypes' => 'Konten :attribute harus berupa ekstensi atau format video (mp4).',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',

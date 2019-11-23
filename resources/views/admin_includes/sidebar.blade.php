@@ -50,12 +50,12 @@
                         <li>
                             <ul>
                                 <li>
-                                    <a href="/admin/buatanrumah">
+                                    <a href="/admin/buatan-rumah" class="{{ (request()->is('admin/buatan-rumah')) ? 'is-active' : ''}}">
                                         <i class="fas fa-id-badge icon"></i> Kelola Konten Umum
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/pemasak-profile">
+                                    <a href="/admin/pemasak-profile" class="{{ (request()->is('admin/pemasak-profile')) ? 'is-active' : ''}}">
                                         <i class="fas fa-id-card icon"></i> Kelola Konten Profile
                                     </a>
                                 </li>
@@ -70,7 +70,7 @@
                         <li>
                             <ul>
                                 <li>
-                                    <a href="/admin/pemasak-makanan">
+                                    <a href="/admin/pemasak-makanan" class="{{ (request()->is('admin/pemasak-makanan')) ? 'is-active' : ''}}">
                                         <i class="fas fa-bread-slice icon"></i> Kelola Makanan Pemasak
                                     </a>
                                 </li>

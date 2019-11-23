@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-     /**
+    /**
      * Indicates if the food model should be timestamped.
      *
      * @var bool
