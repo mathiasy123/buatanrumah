@@ -28,13 +28,13 @@ $(document).ready(function () {
 
     // Script For Retrieve File Name
     $("input[type='file']").change(function (event) {
-        let video_source = event.target.files[0];
+        let media_source = event.target.files[0];
 
-        let url_video = URL.createObjectURL(video_source);
+        let url_media = URL.createObjectURL(media_source);
 
-        $(".file-name-here").text(video_source.name);
+        $(".file-name-here").text(media_source.name);
 
-        document.querySelector(".new-video").src = url_video;
+        document.querySelector(".new-media").src = url_media;
     });
 
     // Close The Nofitication

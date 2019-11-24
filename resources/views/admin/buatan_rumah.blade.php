@@ -22,6 +22,20 @@
             </div>
             @endif
 
+            @if(session('tentang_notif'))
+            <div class="notification is-success">
+                <button class="delete"></button>
+                {{ @session('tentang_notif') }}
+            </div>
+            @endif
+
+            @if(session('hero_notif'))
+            <div class="notification is-success">
+                <button class="delete"></button>
+                {{ @session('hero_notif') }}
+            </div>
+            @endif
+
             <!-- Content Management Hero Section -->
             <div class="columns is-variable is-desktop">
                 <div class="column">

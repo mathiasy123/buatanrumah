@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class VendorContentController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -17,6 +16,33 @@ class VendorContentController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+    }
+
+    /**
+     * Create a re-usable function.
+     *
+     * @return nothing
+     */
+    public function checkFileExists($vendor_data, $type) 
+    {
+        if($type == 'gambar') {
+
+            $file = $vendor_data->hero_image;
+        }
+
+        if($type == 'video') {
+
+            $file =  $vendor_data->video;
+        }
+
+        $old_file = public_path("vendor_images\'frontend\'" . $file);
+    
+        if(file_exists($old_file)) {
+            
+            unlink($old_file);
+        }
+
+        return;
     }
 
     /**
@@ -65,37 +91,88 @@ class VendorContentController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
-        ]);
-
         $vendor_data = VendorContent::find(1);
 
-        $old_file = public_path("vendor_images\'frontend\'" . $vendor_data->video);
+        if($request->konten == 'tentang') {
 
-        if(file_exists($old_file)) {
+            $request->validate([
+                'judul_tentang' => 'max:20',
+                'teks_tentang' => 'max:250'
+            ]);
             
-            unlink($old_file);
-        }
+            $vendor_data->title_about = strip_tags($request->judul_tentang);
 
-        if($request->hasFile('video')) {
-
-            $file = $request->file('video');
-
-            $file_name = 'video-kami' . '.' . $file->getClientOriginalExtension();
-
-            $file->move(public_path('vendor_images/frontend'), $file_name);
-
-            $vendor_data->video = $file_name;
+            $vendor_data->text_about = strip_tags($request->teks_tentang);
 
             $vendor_data->save();
-            
-            session()->flash('video_notif', 'Konten video berhasil dibuat/diubah');
 
-            return redirect('/admin/buatan-rumah');     
+            session()->flash('tentang_notif', 'Konten tentang berhasil dibuat/diubah');
+
+        } else if($request->konten == 'hero') {
+
+            $request->validate([
+                'gambar_hero' => 'image|mimes:jpeg,png,jpg|max:5000',
+                'judul_hero' => 'max:20',
+                'subjudul_hero' => 'max:30',
+                'teks_hero' => 'max:250'
+            ]);
+
+            $vendor_data->title_hero = strip_tags($request->judul_hero);
+
+            $vendor_data->subtitle_hero = strip_tags($request->subjudul_hero);
+
+            $vendor_data->text_hero = strip_tags($request->teks_hero);
+
+            $vendor_data->save();
+
+            $this->checkFileExists($vendor_data, 'gambar');
+    
+            if($request->hasFile('gambar_hero')) {
+    
+                $file = $request->file('gambar_hero');
+    
+                $file_name = 'gambar-hero' . '.' . $file->getClientOriginalExtension();
+    
+                $file->move(public_path('vendor_images/frontend'), $file_name);
+    
+                $vendor_data->hero_image = $file_name;
+    
+                $vendor_data->save();
+                
+                session()->flash('hero_notif', 'Konten video berhasil dibuat/diubah');
+    
+            } else {
+                return redirect('/admin/buatan-rumah');     
+            }
+
         } else {
 
-            return redirect('/admin/buatan-rumah');     
+            $request->validate([
+                'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
+            ]);
+
+            $this->checkFileExists($vendor_data, 'video');
+    
+            if($request->hasFile('video')) {
+    
+                $file = $request->file('video');
+    
+                $file_name = 'video-kami' . '.' . $file->getClientOriginalExtension();
+    
+                $file->move(public_path('vendor_images/frontend'), $file_name);
+    
+                $vendor_data->video = $file_name;
+    
+                $vendor_data->save();
+                
+                session()->flash('video_notif', 'Konten video berhasil dibuat/diubah');
+    
+            } else {
+    
+                return redirect('/admin/buatan-rumah');     
+            }
         }
+
+        return redirect('/admin/buatan-rumah');
     }
 }

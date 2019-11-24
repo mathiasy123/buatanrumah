@@ -171,7 +171,7 @@
                         <div class="field">
                             <label class="label">Nama Anda</label>
                             <div class="control">
-                                <input class="input @error('nama') is-danger @enderror" name="nama" value="{{ old('nama') }}"  type="text" placeholder="Masukkan Nama Anda">
+                                <input class="input @error('nama') is-danger @enderror" name="nama" value="{{ old('nama') }}" type="text" placeholder="Masukkan Nama Anda">
                             </div>
                             @error('nama')
                             <p class="help is-danger">{{ $message }}</p>
