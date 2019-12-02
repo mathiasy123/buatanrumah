@@ -76,6 +76,7 @@ class AdminLoginController extends Controller
         $this->validateLogin($request);
 
         if($this->attemptLogin($request)) {
+            
             return redirect()->intended('admin');
         } 
         
@@ -104,6 +105,7 @@ class AdminLoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->guard('admin')->attempt(
+            
             $this->credentials($request), $request->filled('remember')
         );
     }

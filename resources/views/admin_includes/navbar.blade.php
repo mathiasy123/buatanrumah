@@ -1,7 +1,7 @@
 <nav class="navbar is-fixed-top box-shadow-y">
     <!-- Navbar Section -->
     <div class="navbar-brand">
-        <a href="#" class="navbar-burger toggler">
+        <a class="navbar-burger toggler">
             <span></span>
             <span></span>
             <span></span>
@@ -9,7 +9,7 @@
 
         <a href="/admin" class="navbar-item has-text-weight-bold has-text-black">Buatan Rumah</a>
 
-        <a href="#" class="navbar-burger nav-toggler">
+        <a class="navbar-burger nav-toggler">
             <span></span>
             <span></span>
             <span></span>
@@ -20,8 +20,8 @@
     <!-- Navbar Menu Section -->
     <div class="navbar-menu has-background-white">
         <div class="navbar-start">
-            <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile ">Nama:</span> {{ ucwords(auth('admin')->user()->name) }}</a>
-            <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile ">Role:</span> Admin CMS</a>
+            <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile "><strong>Nama:</strong></span> {{ ucwords(auth('admin')->user()->name) }}</a>
+            <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile "><strong>Role:</strong></span> Admin CMS</a>
         </div>
 
         <div class="navbar-end">
@@ -33,7 +33,7 @@
                     <div class="navbar-dropdown is-right">
                         <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile">Terdaftar: </span> {{ auth('admin')->user()->created_at }}</a>
                         <hr class="navbar-divider">
-                        <a href="/admin/logout" class="navbar-item has-text-centered-mobile has-text-centered-tablet">Logout</a>
+                        <a href="/admin/logout" class="navbar-item has-text-centered-mobile has-text-centered-tablet">Keluar Aplikasi</a>
                     </div>
                 </div>
                 <!-- End Dropdown Section -->

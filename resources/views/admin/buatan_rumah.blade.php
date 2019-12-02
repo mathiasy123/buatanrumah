@@ -15,6 +15,13 @@
             </div>
             <!-- End Title Vendor Page -->
 
+            @if(session('hero_notif'))
+            <div class="notification is-success">
+                <button class="delete"></button>
+                {{ @session('hero_notif') }}
+            </div>
+            @endif
+
             @if(session('video_notif'))
             <div class="notification is-success">
                 <button class="delete"></button>
@@ -26,13 +33,6 @@
             <div class="notification is-success">
                 <button class="delete"></button>
                 {{ @session('tentang_notif') }}
-            </div>
-            @endif
-
-            @if(session('hero_notif'))
-            <div class="notification is-success">
-                <button class="delete"></button>
-                {{ @session('hero_notif') }}
             </div>
             @endif
 
@@ -52,28 +52,28 @@
                                 <!-- Image Content -->
                                 <h5>Gambar:</h5>
                                 <figure class="image is-4by3">
-                                    <img src="{{ asset('vendor_images/frontend/' . $content->hero_image) }}">
+                                    <img src="{{ asset('vendor_assets/images/' . $vendor_content->hero_image) }}">
                                 </figure>
                                 <!-- End Image Content -->
                                 
                                 <!-- Title Content -->
                                 <h5>Judul:</h5>
-                                <p>{{ $content->title_hero }}</p>
+                                <p>{{ $vendor_content->title_hero }}</p>
                                 <!-- End Title Content -->
 
                                 <!-- Sub Title Content -->
                                 <h5>Sub Judul:</h5>
-                                <p>{{ $content->subtitle_hero }}</p>
+                                <p>{{ $vendor_content->subtitle_hero }}</p>
                                 <!-- End Sub Title Content -->
 
                                 <!-- Text Content -->
                                 <h5>Teks:</h5>
-                                <p class="wrap-text has-text-left">{{ $content->text_hero }}</p>
+                                <p class="wrap-text has-text-left">{{ $vendor_content->text_hero }}</p>
                                 <!-- End Text Content -->
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="/admin/buatan-rumah/konten_hero" class="card-footer-item has-background-success has-text-white">Buat/Ubah Konten</a>
+                            <a href="/admin/buatan-rumah/hero" class="card-footer-item has-background-success has-text-white">Buat/Ubah Konten</a>
                         </div>
                     </div>
                 </div>
@@ -95,17 +95,17 @@
                                 
                                 <!-- Title Content -->
                                 <h5>Judul:</h5>
-                                <p>{{ $content->title_about }}</p>
+                                <p>{{ $vendor_content->title_about }}</p>
                                 <!-- End Title Content -->
 
                                 <!-- Text Content -->
                                 <h5>Teks:</h5>
-                                <p class="wrap-text has-text-left">{{ $content->text_about }}</p>
+                                <p class="wrap-text has-text-left">{{ $vendor_content->text_about }}</p>
                                 <!-- End Text Content -->
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="/admin/buatan-rumah/konten_tentang" class="card-footer-item has-background-success has-text-white">Buat/Ubah Konten</a>
+                            <a href="/admin/buatan-rumah/tentang" class="card-footer-item has-background-success has-text-white">Buat/Ubah Konten</a>
                         </div>
                     </div>
                 </div>
@@ -128,13 +128,13 @@
                                 <!-- Video Content -->
                                 <h5>Video:</h5>
                                 <figure class="image is-16by9">
-                                    <iframe class="has-ratio" width="640" height="360" src="{{ asset('vendor_images/frontend/' . $content->video) }}" frameborder="0" allowfullscreen></iframe>
+                                    <iframe class="has-ratio" width="640" height="360" src="{{ asset('vendor_assets/videos/' . $vendor_content->video) }}" frameborder="0" allowfullscreen></iframe>
                                 </figure>
                                 <!-- End Video Content -->
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="/admin/buatan-rumah/konten_video" class="card-footer-item has-background-success has-text-white">Buat/Ubah Konten</a>
+                            <a href="/admin/buatan-rumah/video" class="card-footer-item has-background-success has-text-white">Buat/Ubah Konten</a>
                         </div>
                     </div>
                 </div>

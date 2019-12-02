@@ -23,21 +23,41 @@ Route::prefix('register')->group(function () {
  * Admin (CMS) Login And Other Routes
  */
 Route::prefix('admin')->group(function () {
+
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm');
     Route::post('/login', 'Auth\AdminLoginController@login');
+
     Route::get('/', 'AdminController@index');
+    
     Route::get('/pemasak', 'AdminController@chef');
     Route::post('/pemasak', 'AdminController@chef');
+
+    Route::get('/ubah/pemasak/{user_id}', 'UserController@edit');
+    Route::put('/ubah/pemasak', 'UserController@update');
+
     Route::get('/re-seller', 'AdminController@reSeller');
 
     Route::prefix('buatan-rumah')->group(function () {
+
         Route::get('/', 'AdminController@buatanRumah');
+
         Route::put('/', 'VendorContentController@update');
         Route::get('/{content}', 'VendorContentController@edit');
     });
     
     Route::get('/pemasak-profile', 'AdminController@chefProfile');
+
     Route::get('/pemasak-makanan', 'AdminController@chefFood');
+    Route::post('/pemasak-makanan', 'AdminController@chefFood');
+    
+    Route::get('/tambah/pemasak-makanan', 'FoodController@create');
+    Route::post('/tambah/pemasak-makanan', 'FoodController@store');
+    Route::delete('/hapus/pemasak-makanan/{user_id}/{food_id}', 'FoodController@destroy');
+    Route::get('/ubah/pemasak-makanan/{food_id}', 'FoodController@edit');
+    Route::put('/ubah/pemasak-makanan', 'FoodController@update');
+
+    Route::get('/pemasak-profil', 'AdminController@chefProfile');
+
     Route::get('/logout', 'Auth\AdminLoginController@adminLogout');
 });
 
@@ -50,15 +70,6 @@ Route::prefix('login')->group(function () {
 });
 
 /**
- * Chef's Profile Routes
- */
-Route::prefix('profile')->group(function () {
-    Route::get('/order/food/{food_id}', 'OrderController@create');
-    Route::get('/{user_id}', 'ProfileController@index');
-    Route::post('/{user_id}', 'ProfileController@index');
-});
-
-/**
  * Logout Routes
  */
 Route::get('/logout', 'Auth\LoginController@userLogout');
@@ -66,24 +77,32 @@ Route::get('/logout', 'Auth\LoginController@userLogout');
 /**
  * Chef's Routes
  */
-Route::prefix('chef')->group(function () {
+Route::prefix('pemasak')->group(function () {
+
     Route::get('/', 'UserController@index');
-});
 
-/**
- * Order Routes
- */
-Route::prefix('order')->group(function () {
-    Route::get('/detail/{order_id}', 'OrderController@show');
-    Route::post('/store', 'OrderController@store');
-    Route::get('/', 'OrderController@index');
-    Route::post('/', 'OrderController@index');
-});
+    Route::get('/makanan', 'FoodController@index');
+    Route::post('/makanan', 'FoodController@index');
+    
+    Route::get('/pemesanan', 'OrderController@index');
+    Route::post('/pemesanan', 'OrderController@index');
 
-/**
- * Food Route
- */
-Route::get('/food', 'FoodController@index');
+    Route::get('/detail/pemesanan/{order_id}', 'OrderController@show');
+
+    Route::get('/pemesanan-selesai', 'OrderController@finishedOrder');
+    Route::post('/pemesanan-selesai', 'OrderController@finishedOrder');
+
+    Route::prefix('profil')->group(function () {
+
+        Route::get('/order/food/{food_id}', 'OrderController@create');
+        Route::post('/store', 'OrderController@store');
+
+        Route::get('/{user_id}', 'ProfileController@index');
+        Route::post('/{user_id}', 'ProfileController@index');
+
+    });
+
+});
 
 /**
  * Vendor Buatan Rumah Route

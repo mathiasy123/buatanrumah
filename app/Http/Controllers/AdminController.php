@@ -10,6 +10,10 @@ use App\ReSeller;
 
 use App\VendorContent;
 
+use App\Food;
+
+use App\Profile;
+
 class AdminController extends Controller
 {
     /**
@@ -21,7 +25,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth:admin');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -29,15 +33,19 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $chefs = User::latest()->take(10)->get();
-
-        $resellers = ReSeller::latest()->take(10)->get();
-        
         $count_chef = User::count();
 
         $count_reseller = ReSeller::count();
 
-        return view('admin.dashboard', compact('chefs', 'count_chef', 'resellers', 'count_reseller'));
+        $count_food = Food::count();
+        
+        $chefs = User::latest()->take(10)->get();
+
+        $resellers = ReSeller::latest()->take(10)->get();
+
+        $foods = Food::latest()->take(10)->get();
+
+        return view('admin.dashboard', compact('chefs', 'count_chef', 'resellers', 'count_reseller', 'foods', 'count_food'));
     }
 
     /**
@@ -120,9 +128,9 @@ class AdminController extends Controller
      */
     public function buatanRumah()
     {
-        $content = VendorContent::first();
+        $vendor_content = VendorContent::first();
 
-        return view('admin.buatan_rumah', compact('content'));
+        return view('admin.buatan_rumah', compact('vendor_content'));
     }
 
     /**
@@ -130,9 +138,37 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function chefProfile()
+    public function chefProfile(Request $request)
     {
-        return view('admin.chef_profile');
+        session()->forget('profile_not_found');
+
+        $request->validate([
+            'profile_keyword' => 'nullable'
+        ]);
+
+        $profiles = Profile::when($request->profile_keyword, function($query) use($request) {
+                    $query->WhereHas('user', function($query) use($request) {
+                        $query->where('name', 'like', '%' . strip_tags($request->profile_keyword) . '%');
+                    });
+                })
+                ->latest()
+                ->paginate(6);  
+
+        $profiles->appends($request->only('profile_keyword'));
+
+        dd($profiles->user->name);
+
+        if(count($profiles)) {
+
+            return view('admin.chef_profile');
+
+        } else {
+            
+            session()->flash('profile_not_found', 'Maaf, data profil pemasak yang Anda dicari tidak ada');
+            
+            return view('admin.chef_profile');
+        }
+        
     }
 
     /**
@@ -140,8 +176,36 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function chefFood()
+    public function chefFood(Request $request)
     {
-        return view('admin.chef_food');
+        session()->forget('food_not_found');
+
+        $request->validate([
+            'chef_keyword' => 'nullable'
+        ]);
+
+        $chef_foods = Food::when($request->food_keyword, function($query) use($request) {
+                            $query->WhereHas('user', function($query) use($request) {
+                                $query->where('name', 'like', '%' . strip_tags($request->food_keyword) . '%');
+                            })
+                            ->orWhere('food_name', 'like', '%' . strip_tags($request->food_keyword) . '%')
+                            ->orWhere('rating', $request->food_keyword)
+                            ->orWhere('price', $request->food_keyword);
+                        })
+                        ->latest()
+                        ->paginate(6);  
+        
+        $chef_foods->appends($request->only('food_keyword'));
+
+        if(count($chef_foods)) {
+
+            return view('admin.chef_food', compact('chef_foods'));
+
+        } else {
+            
+            session()->flash('food_not_found', 'Maaf, data makanan pemasak yang Anda dicari tidak ada');
+            
+            return view('admin.chef_food', compact('chef_foods'));
+        }
     }
 }

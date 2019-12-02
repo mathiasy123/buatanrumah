@@ -23,7 +23,9 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:web')->only('index');
+
+        $this->middleware('auth:admin')->except('index');
     }
 
     /**
@@ -38,12 +40,16 @@ class UserController extends Controller
         $count_order = Order::where('user_id', $user->id)->count();
 
         $count_food = Food::where('user_id', $user->id)->count();
+        
+        $count_finished_order = Order::where('user_id', $user->id)->where('finished', 1)->count();
 
-        $orders = Order::where('user_id', $user->id)->take(10)->get();
+        $foods = Food::where('user_id', $user->id)->take(10)->latest()->get();
 
-        $foods = Food::where('user_id', $user->id)->take(10)->get();
+        $orders = Order::where('user_id', $user->id)->take(10)->latest()->get();
 
-        return view('chef.dashboard', compact('count_order', 'count_food', 'orders', 'foods'));
+        $finished_orders = Order::where('user_id', $user->id)->where('finished', 1)->take(10)->latest()->get();
+
+        return view('chef.dashboard', compact('orders', 'count_order', 'foods', 'count_food', 'finished_orders', 'count_finished_order'));
     }
 
     /**
@@ -84,9 +90,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
-        //
+        $chefs = User::find($user_id);
+
+        return view('admin.form_chef', compact('chefs'));
     }
 
     /**
@@ -96,9 +104,66 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        session()->forget('chef_notif');
+
+        $chef = User::find($request->user_id);
+
+        $request->validate([
+            'nama_pemasak' => 'required|string|max:50',
+            'email_pemasak' => 'required|email:rfc,strict|max:50',
+            'ig_pemasak' => 'required|string|max:30',
+            'telp_pemasak' => 'required|numeric|digits_between:9,15',
+            'alamat_pemasak' => 'required|string|max:250',
+            'gambar_pemasak' => 'image|mimes:jpeg,png,jpg|max:5000'
+        ]);
+
+        $chef->name = $request->nama_pemasak;
+
+        $chef->email = $request->email_pemasak;
+
+        $chef->phone_call = $request->telp_pemasak;
+
+        $chef->address = $request->alamat_pemasak;
+
+        $chef->instagram = $request->ig_pemasak;
+
+        $chef->save();
+
+        if($request->hasFile('gambar_pemasak')) {
+            
+            $file = $request->file('gambar_pemasak');
+
+            $folder_path = public_path('user_assets\images\\chef\\');
+
+                $file_name = $request->nama_pemasak . '.' . $file->getClientOriginalExtension();
+
+                $current_file = $chef->user_image;
+
+                $old_file = public_path('user_assets\images\chef\\' . $current_file);
+
+                if(file_exists($old_file)) {
+
+                    unlink($old_file);
+                }
+
+                $file->move(public_path('user_assets/images/chef'), $file_name);
+
+                $chef->user_image = $file_name;
+
+                $chef->save();
+
+                session()->flash('chef_notif', 'Data akun pemasak berhasil diubah');
+
+                return redirect('/admin/pemasak');
+
+        } else {
+
+            return redirect('/admin/pemasak'); 
+        }
+
+        return redirect('/admin/pemasak');
     }
 
     /**

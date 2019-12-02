@@ -38,10 +38,22 @@
             </div>
             <!-- End Search Chef Account Table -->
 
+            @if(session('chef_notif'))
+
+                <div class="content">
+                    <div class="notification is-success">
+                        <button class="delete"></button>
+                        {{ @session('chef_notif') }}
+                    </div>
+                </div>
+
+            @endif
+
             <!-- Chef Account Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
-                    @if(session('order_not_found'))
+
+                    @if(session('chef_not_found'))
 
                     <div class="content">
                         <h3 class="has-text-centered flash-message">-- {{ @session('chef_not_found') }} --</h3>
@@ -59,6 +71,7 @@
                                 <th>Nomor Telepon Pemasak</th>
                                 <th>Alamat Pemasak</th>
                                 <th>Instagram Pemasak</th>
+                                <th>Aksi</th>
                             </thead>
                             <tbody>
                                 
@@ -74,7 +87,7 @@
                                     @else
 
                                     <td>
-                                        <img src="{{ asset('chef_images/frontend/' . $chef->user_image) }}" width="150" height="140" alt="Foto Pemasak">
+                                        <img src="{{ asset('user_assets/images/chef/' . $chef->user_image) }}" width="150" height="140" alt="Foto Pemasak">
                                     </td>
 
                                     @endif
@@ -83,6 +96,15 @@
                                     <td>{{ ($chef->phone_call == '') ? '-----' :  $chef->phone_call }}</td>
                                     <td>{{ ($chef->address == '') ? '-----' : ucwords($chef->address) }}</td>
                                     <td>{{ ($chef->instagram == '') ? '-----' : $chef->instagram }}</td>
+
+                                    <td>
+                                        <a href="/admin/ubah/pemasak/{{ $chef->id }}" class="button is-warning">
+                                            <span class="icon">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </span>
+                                            <span>Ubah</span>
+                                        </a> 
+                                    </td>
                                 </tr>
                                 @endforeach
 

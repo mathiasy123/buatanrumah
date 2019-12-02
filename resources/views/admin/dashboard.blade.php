@@ -45,11 +45,11 @@
                     <div class="card has-background-info has-text-white">
                         <div class="card-header">
                             <div class="card-header-title has-text-white">
-                                Data Profile Pemasak
+                                Data Makanan Pemasak
                             </div>
                         </div>
                         <div class="card-content">
-                            <p class="is-size-3">Total: 1000</p>
+                            <p class="is-size-3">Total: {{ $count_food }}</p>
                         </div>
                     </div>
                 </div>
@@ -149,6 +149,54 @@
                 </div>
             </div>
             <!-- End Re-seller Account Table -->
+
+            <!-- Title Chef's Food Table -->
+            <div class="columns is-variable is-desktop">
+                <div class="column">
+                    <div class="level">
+                        <div class="level-left">
+                            <h1 class="title">Data Makanan Pemasak</h1>
+                        </div>
+                        <div class="level-right">
+                            <a href="/admin/pemasak-makanan" class="button overview-detail is-link is-rounded">Lihat Lebih Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Title Chef's Food Table -->
+
+            <!-- Chef's Food Table -->
+            <div class="columns is-variable is-desktop">
+                <div class="column">
+                    <div class="table-container">
+                        <table class="table table-data is-hoverable is-fullwidth">
+                            <thead>
+                                <th>#</th>
+                                <th>Pemilik Makanan</th>
+                                <th>Nama Makanan</th>
+                                <th>Rating Makanan</th>
+                                <th>Deskripsi Makanan</th>
+                                <th>Harga Makanan</th>
+                            </thead>
+                            <tbody>
+
+                                @foreach($foods as $food)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>Andi</td>
+                                    <td>{{ ucwords($food->food_name) }}</td>
+                                    <td>{{ $food->rating }}</td>
+                                    <td>{{ $food->description }}</td>
+                                    <td>{{ $food->price }}</td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End Chef's Food Table -->
 
         </div>
     </div>

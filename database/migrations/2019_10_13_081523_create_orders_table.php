@@ -14,19 +14,20 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('order_id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('food_id')->nullable();
-            $table->string('order_code', '9')->unique();
-            $table->string('customer_name', '50');
-            $table->string('customer_phone', '15');
-            $table->string('customer_address', '150');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('food_id');
+            $table->string('order_code', 9)->unique();
+            $table->string('customer_name', 50);
+            $table->string('customer_phone', 15);
+            $table->string('customer_address', 200);
             $table->integer('quantity');
             $table->integer('total_price');
+            $table->smallInteger('finished');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('food_id')->references('food_id')->on('foods');
+            $table->foreign('food_id')->references('id')->on('foods');
         });
     }
 

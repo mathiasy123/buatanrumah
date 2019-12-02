@@ -39,7 +39,8 @@
                         <div class="card-content">
                             <div class="content">
                                 
-                                @if($content_to_update == 'konten_hero')
+                                @if($content_to_update == 'hero')
+
                                 <p>Form ini adalah untuk mengelola konten bagian hero pada halaman buatan rumah</p>
 
                                 <div class="content">
@@ -49,11 +50,13 @@
 
                                         <input type="hidden" name="konten" value="hero">
 
+                                        <input type="hidden" name="content_id" value="{{ $vendor_content->id }}">
+                                    
                                         <div class="field">
                                             <label class="label">Gambar Sekarang</label>
                                             
                                             <figure class="image is-4by3">
-                                                <img src="{{ asset('vendor_images/frontend/' . $vendor_content->hero_image) }}">
+                                                <img src="{{ asset('vendor_assets/images/' . $vendor_content->hero_image) }}">
                                             </figure>
 
                                         </div>
@@ -86,7 +89,7 @@
                                         <div class="field">
                                             <label class="label">Judul Hero</label>
                                             <div class="control">
-                                                <input class="input @error('judul_hero') is-danger @enderror" name="judul_hero" value="{{ $vendor_content->title_hero }}" type="text" placeholder="Masukkan Judul Hero Anda">
+                                                <input class="input @error('judul_hero') is-danger @enderror" name="judul_hero" value="{{ (old('judul_hero')) ? old('judul_hero') : $vendor_content->title_hero }}" type="text" placeholder="Masukkan Judul Hero Anda">
                                             </div>
                                             @error('judul_hero')
                                             <p class="help is-danger">{{ $message }}</p>
@@ -96,7 +99,7 @@
                                         <div class="field">
                                             <label class="label">Sub Judul Hero</label>
                                             <div class="control">
-                                                <input class="input @error('subjudul_hero') is-danger @enderror" name="subjudul_hero" value="{{ $vendor_content->subtitle_hero }}" type="text" placeholder="Masukkan Sub Judul Hero Anda">
+                                                <input class="input @error('subjudul_hero') is-danger @enderror" name="subjudul_hero" value="{{ (old('subjudul_hero')) ? old('subjudul_hero') : $vendor_content->subtitle_hero }}" type="text" placeholder="Masukkan Sub Judul Hero Anda">
                                             </div>
                                             @error('subjudul_hero')
                                             <p class="help is-danger">{{ $message }}</p>
@@ -106,7 +109,7 @@
                                         <div class="field">
                                             <label class="label">Teks hero</label>
                                             <div class="control">
-                                                <textarea class="textarea" name="teks_hero">{{ $vendor_content->text_hero }}</textarea>
+                                                <textarea class="textarea" name="teks_hero">{{ (old('teks_hero')) ? old('teks_hero') : $vendor_content->text_hero }}</textarea>
                                             </div>
                                             @error('teks_hero')
                                             <p class="help is-danger">{{ $message }}</p>
@@ -119,7 +122,8 @@
                                 </div>
                                 @endif
                                 
-                                @if($content_to_update == 'konten_tentang')
+                                @if($content_to_update == 'tentang')
+
                                 <p>Form ini adalah untuk mengelola konten bagian tentang pada halaman buatan rumah</p>
 
                                 <div class="content">
@@ -129,10 +133,12 @@
 
                                         <input type="hidden" name="konten" value="tentang">
 
+                                        <input type="hidden" name="content_id" value="{{ $vendor_content->id }}">
+
                                         <div class="field">
                                             <label class="label">Judul Tentang</label>
                                             <div class="control">
-                                                <input class="input @error('judul_tentang') is-danger @enderror" name="judul_tentang" value="{{ $vendor_content->title_about }}" type="text" placeholder="Masukkan Judul Tentang Anda">
+                                                <input class="input @error('judul_tentang') is-danger @enderror" name="judul_tentang" value="{{ (old('judul_tentang')) ? old('judul_tentang') : $vendor_content->title_about }}" type="text" placeholder="Masukkan Judul Tentang Anda">
                                             </div>
                                             @error('judul_tentang')
                                             <p class="help is-danger">{{ $message }}</p>
@@ -142,7 +148,7 @@
                                         <div class="field">
                                             <label class="label">Teks Tentang</label>
                                             <div class="control">
-                                                <textarea class="textarea" name="teks_tentang">{{ $vendor_content->text_about }}</textarea>
+                                                <textarea class="textarea" name="teks_tentang">{{ (old('teks_tentang')) ? old('teks_tentang') : $vendor_content->text_about }}</textarea>
                                             </div>
                                             @error('teks_tentang')
                                             <p class="help is-danger">{{ $message }}</p>
@@ -155,18 +161,22 @@
                                 </div>
                                 @endif
 
-                                @if($content_to_update == 'konten_video')
+                                @if($content_to_update == 'video')
+
                                 <p>Form ini adalah untuk mengelola konten bagian video pada halaman buatan rumah</p>
 
                                 <div class="content">
                                     <form method="post" action="/admin/buatan-rumah" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
+
+                                        <input type="hidden" name="content_id" value="{{ $vendor_content->id }}">
+
                                         <div class="field">
                                             <label class="label">Video Sekarang</label>
                                             
                                             <figure class="image is-16by9">
-                                                <iframe class="has-ratio" width="640" height="360" src="{{ asset('vendor_images/frontend/' . $vendor_content->video) }}" frameborder="0" allowfullscreen></iframe>
+                                                <iframe class="has-ratio" width="640" height="360" src="{{ asset('vendor_assets/videos/' . $vendor_content->video) }}" frameborder="0" allowfullscreen></iframe>
                                             </figure>
                                         </div>
                                         <div class="field">

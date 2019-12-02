@@ -14,12 +14,12 @@ class CreateFoodsTable extends Migration
     public function up()
     {
         Schema::create('foods', function (Blueprint $table) {
-            $table->bigIncrements('food_id');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('food_name', 50);
             $table->integer('rating');
             $table->text('description');
-            $table->string('image', 255);
+            $table->string('image', 50);
             $table->integer('price');
             $table->timestamps();
 

@@ -55,7 +55,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/pemasak-profile" class="{{ (request()->is('admin/pemasak-profile')) ? 'is-active' : ''}}">
+                                    <a href="/admin/pemasak-profil" class="{{ (request()->is('admin/pemasak-profil')) ? 'is-active' : ''}}">
                                         <i class="fas fa-id-card icon"></i> Kelola Konten Profile
                                     </a>
                                 </li>

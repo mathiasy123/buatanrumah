@@ -1,78 +1,108 @@
 @extends('chef_layout.master_dashboard')
 
-@section('title', 'Jessica Doe | Pemesanan')
+@section('title', 'Pemasak | Lihat Pemesanan')
 
 @section('chef_content')
-<!-- Tabel Data Section -->
-<section class="section tabel-order" id="tabel-order">
-    <div class="container is-fluid">
-        <div class="columns container is-fluid">
-            <div class="column is-12">
-                <h3 class="is-size-3 title-pemesanan">Data Pemesanan</h3>
+<div class="content">
+    <div class="column is-10-desktop is-offset-2-desktop is-9-tablet is-offset-3-tablet is-12-mobile">
+        <div class="p-1">
+            
+            <!-- Title Order Table -->
+            <div class="columns is-variable is-desktop">
+                <div class="column">
+                    <h1 class="title">Data Pemesanan</h1>
+                </div>
             </div>
-        </div>
-        <div class="columns container is-fluid">
-            <div class="column is-9">
-                <form method="post" action="{{ url()->current() }}">
-                    @csrf
-                    <div class="control has-icons-right">
-                        <input class="input is-medium @error('order_keyword') is-danger @enderror" name="order_keyword" type="text" placeholder="Cari Masakan">
-                        <span class="icon is-right">
-                            <i class="fas fa-search"></i>
-                        </span>
+            <!-- End Title Order Table -->
 
-                        @error('order_keyword')
-                        <p class="help is-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    
-                </form>
-                
+            <!-- Search Order Table -->
+            <div class="columns is-variable is-desktop">
+                <div class="column is-9-desktop is-12-mobile">
+                    <form method="post" action="{{ url()->current() }}">
+                        @csrf
+                        <div class="control has-icons-right">
+                            <input class="input is-medium @error('order_keyword') is-danger @enderror" name="order_keyword" type="text" placeholder="Cari Pemesanan Anda">
+                            <span class="icon is-right">
+                                <i class="fas fa-search"></i>
+                            </span>
+
+                            @error('order_keyword')
+                            <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </form>
+                </div>
+                <div class="column is-2-desktop is-12-mobile">
+                    <a href="/pemasak/pemesanan" class="button reset-button is-danger is-rounded is-fullwidth-mobile is-medium">Reset Pencarian</a>
+                </div>
             </div>
-            <div class="column is-2">
-                <a href="/order" class="button reset-button is-danger is-rounded is-medium">Reset Pencarian</a>
+            <!-- End Search Order Table -->
+
+            @if(session('order_notif'))
+            <div class="notification is-success">
+                <button class="delete"></button>
+                {{ @session('order_notif') }}
             </div>
-        </div>
-        <div class="columns container is-fluid">
-            <div class="column is-12">
-                @if(session('order_not_found'))
+            @endif
+
+            <!-- Order Table -->
+            <div class="columns is-variable is-desktop">
+                <div class="column">
+
+                    @if(session('order_not_found'))
 
                     <div class="content">
                         <h3 class="has-text-centered flash-message">-- {{ @session('order_not_found') }} --</h3>
                     </div>
 
-                @else
+                    @else
 
-                <table class="table is-hoverable is-fullwidth">
-                    <thead>
-                        <th>#</th>
-                        <th>Kode Pemesanan</th>
-                        <th>Tanggal Pemesanan</th>
-                        <th>Aksi</th>
-                    </thead>
-                    <tbody>
-                        
-                        @foreach($orders as $order)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ strtoupper($order->order_code) }}</td>
-                            <td>{{ $order->created_at }}</td>
-                            <td>
-                                <a href="/order/detail/{{ $order->order_id }}" class="button is-info is-rounded">Lihat Detail</a>
-                            </td>
-                        </tr>
-                        @endforeach 
+                    <div class="table-container">
+                        <table class="table table-data is-hoverable is-fullwidth">
+                            <thead>
+                                <th>#</th>
+                                <th>Kode Pemesanan</th>
+                                <th>Nama Pemesan</th>
+                                <th>Telepon Pemesan</th>
+                                <th>Aksi</th>
+                            </thead>
+                            <tbody>
+                                
+                                @foreach($orders as $index => $order)
+                                <tr>
+                                    <td>{{ $index + $orders->firstItem() }}</td>
+                                    <td>{{ strtoupper($order->order_code) }}</td>
+                                    <td>{{ ucwords($order->customer_name) }}</td>
+                                    <td>{{ $order->customer_phone }}</td>
 
-                    </tbody>
-                </table>
-                
-                {{ $orders->links() }}
+                                    <td>
+                                        <div class="control">
+                                            <a href="/pemasak/detail/pemesanan/{{ $order->id }}" class="button is-info">
+                                                <span class="icon">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </span>
+                                                <span>Lihat Detail</span>
+                                            </a> 
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
 
-                @endif
+                            </tbody>
+                        </table>
+                    </div>
 
+                    {{ $orders->links() }}
+
+                    @endif
+
+                </div>
             </div>
+            <!-- End Order Table -->
+
         </div>
     </div>
-</section>
-<!-- End Tabel Data Section -->
+</div>
 @endsection
+
+

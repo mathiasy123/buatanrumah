@@ -18,7 +18,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'food_id', 'order_code', 'customer_name', 'customer_phone', 'customer_address', 'quantity', 'total_price'];
+    protected $fillable = ['user_id', 'food_id', 'order_code', 'customer_name', 'customer_phone', 'customer_address', 'quantity', 'total_price', 'finished'];
 
     /**
      * Set the Order and User relation.
@@ -27,7 +27,7 @@ class Order extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 
     /**
@@ -37,6 +37,6 @@ class Order extends Model
      */
     public function food()
     {
-        return $this->hasOne('App\Food');
+        return $this->hasOne('App\Food', 'id');
     }
 }

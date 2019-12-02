@@ -15,13 +15,17 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('food_id')->nullable();
-            $table->text('about');
+            $table->unsignedBigInteger('user_id');
+            $table->string('hero_image', 255);
+            $table->string('title_hero', 30);
+            $table->string('subtitle_hero', 150);
+            $table->string('cathering_name', 50);
+            $table->string('title_about', 30);
+            $table->string('text_about', 255);
+            $table->string('about_image', 255);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('food_id')->references('food_id')->on('foods');
         });
     }
 

@@ -13,6 +13,16 @@ use App\Food;
 class OrderController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the order resource.
      *
      * @return \Illuminate\Http\Response
@@ -25,7 +35,7 @@ class OrderController extends Controller
             'order_keyword' => 'nullable'
         ]);
 
-        $orders = Order::where('user_id', 1)
+        $orders = Order::where('user_id', auth('web')->user()->id)
                     ->when($request->order_keyword, function($query) use ($request){
                         $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%');
                     })
@@ -34,10 +44,47 @@ class OrderController extends Controller
         $orders->appends($request->only('order_keyword'));
             
         if(count($orders) > 0) {
+
             return view('chef.order', compact('orders'));
+
         }else {
+
             $request->session()->flash('order_not_found', 'Maaf data pemesanan yang Anda cari tidak ada');
             return view('chef.order', compact('orders'));
+        }  
+    }
+
+    /**
+     * Display a listing of the finished order resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function finishedOrder(Request $request)
+    {
+        $request->session()->forget('order_not_found');
+
+        $request->validate([
+            'order_keyword' => 'nullable'
+        ]);
+
+        $finished_orders = Order::where('user_id', auth('web')->user()->id)
+                                ->where('finished', 1)
+                                ->when($request->order_keyword, function($query) use ($request){
+                                    $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%');
+                                })
+                                ->paginate(10);
+        
+        $finished_orders->appends($request->only('order_keyword'));
+            
+        if(count($finished_orders) > 0) {
+
+            return view('chef.finished_order', compact('finished_orders'));
+
+        } else {
+
+            $request->session()->flash('order_not_found', 'Maaf data pemesanan yang Anda cari tidak ada');
+
+            return view('chef.finished_order', compact('finished_orders'));
         }  
     }
 
@@ -94,11 +141,11 @@ class OrderController extends Controller
      */
     public function show($order_id)
     {
-        $order_detail = Order::join('foods', 'orders.food_id', '=', 'foods.food_id')
-                        ->where('order_id', $order_id)
-                        ->first();
+        $order_details = Order::with('food')->where('orders.id', $order_id)->get();
 
-        return view('chef.order_detail', compact('order_detail'));
+        dd($order_details);
+
+        return view('chef.order_detail', compact('order_details'));
     }
 
     /**

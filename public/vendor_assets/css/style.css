@@ -1,0 +1,63 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+    min-width: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+html,
+body {
+    height: 100%;
+}
+.wrap-text {
+    word-break: break-word;
+}
+.text-x {
+    margin: 0 10%;
+}
+.text-shadow {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+.space-bottom {
+    margin-top: 30px;
+}
+.line-divider {
+    border: 2px solid rgb(195, 195, 19);
+}
+
+/* Hero Styles */
+.hero-body h1 {
+    margin-top: 20px;
+}
+
+/* Card Styles */
+.card {
+    height: 100%;
+    max-width: 100%;
+    box-shadow: 3px 3px 5px grey;
+}
+
+/* Footer Styles */
+.footer {
+    position: absolute;
+    clear: both;
+    border-top: 30px solid #A3B40E;
+    background-color: #292C3F;
+}
+
+/* Desktop Version */
+@media (min-width: 1000px) and (max-width: 1408px) {
+
+    /* Text Style */
+    .space-top {
+        margin-top: 50px;
+    }
+    
+}
+
+/* Mobile Version */
+@media (min-width: 320px) and (max-width: 1000px) {
+
+
+}

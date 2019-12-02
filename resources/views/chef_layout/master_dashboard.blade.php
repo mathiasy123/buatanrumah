@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="home">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
     @include('chef_includes.header')
@@ -10,27 +10,30 @@
 <body>
 
     <!-- Navbar Section -->
-    <header>
-        @include('chef_includes.chef_navbar')
-    </header>
-    <!-- End Navbar Section -->
+    @include('chef_includes.chef_navbar')
+    <!-- End NavbarSection -->
 
-    <!-- Content Section -->
+    <!-- Sidebar Section -->
+    @include('chef_includes.sidebar')
+    <!-- End Sidebar Section -->
+
+    <!-- Dashboard Content Section -->
     @yield('chef_content')
-    <!-- End Content Section -->
+    <!-- End Dashboard Content Section -->
 
     <!-- Footer Section -->
-    <footer class="footer" id="footer">
-        @include('chef_includes.footer')
-    </footer>
+    @include('chef_includes.footer')
     <!-- End Footer Section -->
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
+    <!-- Nice Scroll PLuggin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 
-    <!-- Own Javascript -->
-    <script src="{{ asset('chef_js/script.js') }}"></script>
+    <!-- Nice Scroll PLuggin -->
+    <script src="{{ asset('user_assets/js/script.js') }}"></script>
 </body>
 
 </html>

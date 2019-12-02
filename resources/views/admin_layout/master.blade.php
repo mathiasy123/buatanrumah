@@ -33,7 +33,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 
     <!-- Nice Scroll PLuggin -->
-    <script src="{{ asset('admin_js/script.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/script.js') }}"></script>
 </body>
 
 </html>

@@ -41,6 +41,7 @@
             <!-- Re-Seller Account Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
+                
                     @if(session('reseller_not_found'))
 
                     <div class="content">

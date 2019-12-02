@@ -17,16 +17,17 @@ class FoodsTableSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        foreach(range(0, 10) as $iteration) {
+        for($count = 1; $count <= 20; $count++) {
 
             Food::create([
-                'user_id' => $faker->numberBetween(1, 2),
-                'food_name' => $faker->word,
+                'user_id' => 1,
+                'food_name' => 'Sop Buntut',
                 'rating' => $faker->numberBetween(1, 10),
                 'description' => $faker->text($maxNbChars = 50),
-                'image' => 'Mask Group 1.png',
+                'image' => 'Sop Buntut.jpg',
                 'price' => 20000
             ]);
+
         }
     }
 }

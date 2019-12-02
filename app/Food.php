@@ -19,7 +19,7 @@ class Food extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'food_name', 'rating', 'description', 'image'];
+    protected $fillable = ['user_id', 'food_name', 'rating', 'description', 'image', 'price'];
 
     /**
      * Set the Food and User relation.
@@ -28,7 +28,7 @@ class Food extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 
     /**
@@ -38,6 +38,16 @@ class Food extends Model
      */
     public function order()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo('App\Order', 'food_id');
+    }
+
+    /**
+     * Set the Food and Profile relation.
+     *
+     * Many to One Relation (Food => Profile)
+     */
+    public function profile()
+    {
+        return $this->belongsTo('App\Profile');
     }
 }

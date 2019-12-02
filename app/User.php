@@ -44,7 +44,7 @@ class User extends Authenticatable
      */
     public function foods()
     {
-        return $this->belongsTo('App\Food');
+        return $this->hasMany('App\Food');
     }
 
     /**
@@ -54,6 +54,16 @@ class User extends Authenticatable
      */
     public function orders()
     {
-        return $this->belongsTo('App\Order');
+        return $this->hasMany('App\Order');
+    }
+
+    /**
+     * Set the User and Profile relation.
+     *
+     * One to One Relation (User => Profile)
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
     }
 }

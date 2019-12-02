@@ -1,45 +1,47 @@
-<!-- Navbar Menu Section -->
-<nav class="navbar is-white is-fixed-top is-spaced" role="navigation" aria-label="main navigation">
-    <div class="container">
-        <div class="navbar-brand"> 
-            <a href="/biodata/1" class="navbar-item">
-                <h5 class="is-size-5"><strong>{{ ucwords(auth()->user()->name) }}</strong></h5>
-            </a>
+<nav class="navbar is-fixed-top box-shadow-y">
+    <!-- Navbar Section -->
+    <div class="navbar-brand">
+        <a class="navbar-burger toggler">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
 
-            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
+        <a href="/pemasak" class="navbar-item has-text-weight-bold has-text-black">Buatan Rumah</a>
+
+        <a class="navbar-burger nav-toggler">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+    </div>
+    <!-- End Navbar Section -->
+
+    <!-- Navbar Menu Section -->
+    <div class="navbar-menu has-background-white">
+        <div class="navbar-start">
+            <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile "><strong>Nama:</strong></span> {{ ucwords(auth('web')->user()->name) }}</a>
+            <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile "><strong>Role:</strong></span> Pemasak</a>
         </div>
 
-        <div id="navMenu" class="navbar-menu">
+        <div class="navbar-end">
+            <a class="navbar-item">
 
-            <div class="navbar-end">
-                <a class="navbar-item menu-item menu-center page-scroll" href="/chef">
-                    Home
-                </a>
-
-                <a class="navbar-item menu-item menu-center page-scroll" href="/food">
-                    Kelola Makanan
-                </a>
-
-                <a class="navbar-item menu-item menu-center page-scroll" href="/order">
-                    Kelola Pemesanan
-                </a>
-
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a href="/profile/{{ auth()->user()->id }}" class="login-button button is-outlined is-warning is-rounded">
-                            <strong>Lihat Profile</strong>
-                        </a>
-                        <a href="/logout" class="login-button button is-outlined is-warning is-rounded">
-                            <strong>Keluar</strong>
-                        </a>
+                <!-- Dropdown Section -->
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link has-text-centered-mobile has-text-centered-tablet">Pemasak</a>
+                    <div class="navbar-dropdown is-right">
+                        <a class="navbar-item has-text-centered-mobile has-text-centered-tablet"><span class="is-hidden-mobile">Terdaftar: </span> {{ auth('web')->user()->created_at }}</a>
+                        <hr class="navbar-divider">
+                        <a href="/logout" class="navbar-item has-text-centered-mobile has-text-centered-tablet">Keluar Aplikasi</a>
                     </div>
                 </div>
-            </div>
+                <!-- End Dropdown Section -->
+
+            </a>
         </div>
     </div>
+    <!-- End Navbar Menu Section -->
+
 </nav>
-<!-- End Navbar Menu Section -->
+

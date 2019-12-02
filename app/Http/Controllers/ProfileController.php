@@ -6,8 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Food;
 
+use App\Profile;
+
 class ProfileController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only('index');
+
+        $this->middleware('auth:admin')->except('index');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +41,7 @@ class ProfileController extends Controller
                         ->orWhere('rating', $request->food_keyword)
                         ->orWhere('price', $request->food_keyword);
                     })
+                    ->latest()
                     ->paginate(6);
         
         $foods->appends($request->only('food_keyword'));

@@ -4,8 +4,6 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\Hash;
 
-use Faker\Factory as Faker;
-
 use App\Admin;
 
 class AdminsTableSeeder extends Seeder
@@ -17,12 +15,10 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('id_ID');
-
         Admin::create([
-            'name' => $faker->name,
-            'email' => $faker->email,
-            'password' => Hash::make('doraxmachadmin123')
+            'name' => 'Admin',
+            'email' => 'admin.cms711@buatanrumah.id',
+            'password' => Hash::make('admin567@!')
         ]);
         
     }

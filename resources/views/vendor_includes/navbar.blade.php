@@ -1,50 +1,51 @@
-<!-- Navbar Menu Section -->
-<nav class="navbar is-white is-fixed-top is-spaced" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item">
-                <h5 class="is-size-5"><strong>Buatan Rumah</strong></h5>
+                <strong>Buatan Rumah</strong>
             </a>
 
-            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+            <a role="button" class="navbar-burger burger is-active" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
             </a>
         </div>
 
-        <div id="navMenu" class="navbar-menu">
-
-            <div class="navbar-end">
-                <a class="navbar-item menu-item menu-center page-scroll" href="#home">
-                    Home
+        <div class="navbar-menu is-active">
+            <div class="navbar-end has-text-centered">
+                <a href="#beranda" class="navbar-item menu-scroll">
+                    Beranda
                 </a>
 
-                <a class="navbar-item menu-item menu-center page-scroll" href="#tentang">
+                <a href="#tentang" class="navbar-item menu-scroll">
                     Tentang
                 </a>
 
-                <a class="navbar-item menu-item menu-center page-scroll" href="#video">
-                    Video Kami
+                <a href="#video" class="navbar-item menu-scroll">
+                    Video
                 </a>
 
-                <a class="navbar-item menu-item menu-center page-scroll" href="#pemasak">
-                    Pemasak
+                <a href="#anggota" class="navbar-item menu-scroll">
+                    Anggota
                 </a>
 
-                <a class="navbar-item menu-item menu-center page-scroll" href="#footer">
+                <a href="#pelayanan" class="navbar-item menu-scroll">
+                    Pelayanan
+                </a>
+
+                <a href="#kontak" class="navbar-item menu-scroll">
                     Kontak
                 </a>
+            </div>
 
+            <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="buttons">
-                        <a href="/register" class="login-button button is-outlined is-warning is-rounded">
-                            <strong>Daftar</strong>
-                        </a>
-                    </div>
+                    <a href="/register" class="button is-warning is-outlined is-fullwidth is-rounded has-text-black">
+                        Daftar Sebagai Anggota
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </nav>
-<!-- End Navbar Menu Section -->

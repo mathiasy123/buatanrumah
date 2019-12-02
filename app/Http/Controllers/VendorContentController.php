@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class VendorContentController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -27,15 +28,13 @@ class VendorContentController extends Controller
     {
         if($type == 'gambar') {
 
-            $file = $vendor_data->hero_image;
+            $old_file = public_path('vendor_assets\images\\' . $vendor_data->hero_image);
         }
 
         if($type == 'video') {
 
-            $file =  $vendor_data->video;
+            $old_file = public_path('vendor_assets\videos\\' . $vendor_data->video);
         }
-
-        $old_file = public_path("vendor_images\'frontend\'" . $file);
     
         if(file_exists($old_file)) {
             
@@ -53,22 +52,21 @@ class VendorContentController extends Controller
      */
     public function edit($segment_content)
     {
-
         $vendor_content = VendorContent::first();
 
         switch($segment_content) {
 
-            case 'konten_hero':
+            case 'hero':
                 $content_to_update = $segment_content;
                 $content_name = 'Hero';
                 break;
 
-            case 'konten_tentang':
+            case 'tentang':
                 $content_to_update = $segment_content;
                 $content_name = 'Tentang';
                 break;
 
-            case 'konten_video':
+            case 'video':
                 $content_to_update = $segment_content;
                 $content_name = 'Video';
                 break;
@@ -91,30 +89,15 @@ class VendorContentController extends Controller
      */
     public function update(Request $request)
     {
-        $vendor_data = VendorContent::find(1);
+        $vendor_data = VendorContent::find($request->content_id);
 
-        if($request->konten == 'tentang') {
-
-            $request->validate([
-                'judul_tentang' => 'max:20',
-                'teks_tentang' => 'max:250'
-            ]);
-            
-            $vendor_data->title_about = strip_tags($request->judul_tentang);
-
-            $vendor_data->text_about = strip_tags($request->teks_tentang);
-
-            $vendor_data->save();
-
-            session()->flash('tentang_notif', 'Konten tentang berhasil dibuat/diubah');
-
-        } else if($request->konten == 'hero') {
+        if($request->konten == 'hero') {
 
             $request->validate([
                 'gambar_hero' => 'image|mimes:jpeg,png,jpg|max:5000',
-                'judul_hero' => 'max:20',
-                'subjudul_hero' => 'max:30',
-                'teks_hero' => 'max:250'
+                'judul_hero' => 'string|max:50',
+                'subjudul_hero' => 'string|max:100',
+                'teks_hero' => 'string|max:255'
             ]);
 
             $vendor_data->title_hero = strip_tags($request->judul_hero);
@@ -125,46 +108,64 @@ class VendorContentController extends Controller
 
             $vendor_data->save();
 
-            $this->checkFileExists($vendor_data, 'gambar');
+            session()->flash('hero_notif', 'Konten hero berhasil dibuat/diubah');
     
             if($request->hasFile('gambar_hero')) {
+
+                $this->checkFileExists($vendor_data, 'gambar');
     
                 $file = $request->file('gambar_hero');
     
                 $file_name = 'gambar-hero' . '.' . $file->getClientOriginalExtension();
     
-                $file->move(public_path('vendor_images/frontend'), $file_name);
+                $file->move(public_path('vendor_assets/images'), $file_name);
     
                 $vendor_data->hero_image = $file_name;
     
                 $vendor_data->save();
-                
-                session()->flash('hero_notif', 'Konten video berhasil dibuat/diubah');
+
+                session()->flash('hero_notif', 'Konten hero berhasil dibuat/diubah');
     
             } else {
+
                 return redirect('/admin/buatan-rumah');     
             }
+
+        } else if($request->konten == 'tentang') {
+
+            $request->validate([
+                'judul_tentang' => 'string|max:20',
+                'teks_tentang' => 'string|max:250'
+            ]);
+            
+            $vendor_data->title_about = strip_tags($request->judul_tentang);
+
+            $vendor_data->text_about = strip_tags($request->teks_tentang);
+
+            $vendor_data->save();
+
+            session()->flash('tentang_notif', 'Konten tentang berhasil dibuat/diubah');
 
         } else {
 
             $request->validate([
-                'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
+                'video' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi|max:100000'
             ]);
-
-            $this->checkFileExists($vendor_data, 'video');
     
             if($request->hasFile('video')) {
+
+                $this->checkFileExists($vendor_data, 'video');
     
                 $file = $request->file('video');
     
                 $file_name = 'video-kami' . '.' . $file->getClientOriginalExtension();
     
-                $file->move(public_path('vendor_images/frontend'), $file_name);
+                $file->move(public_path('vendor_assets/videos'), $file_name);
     
                 $vendor_data->video = $file_name;
     
                 $vendor_data->save();
-                
+
                 session()->flash('video_notif', 'Konten video berhasil dibuat/diubah');
     
             } else {

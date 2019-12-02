@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\VendorContent;
 
-use Illuminate\Http\Request;
+use App\User;
 
 class VendorController extends Controller
 {
@@ -15,9 +17,11 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $content = VendorContent::first();
+        $vendor_content = VendorContent::first();
 
-        return view('vendor.index', compact('content'));
+        $chefs = User::all()->take(3);
+
+        return view('vendor.index', compact('vendor_content', 'chefs'));
     }
 
 }
