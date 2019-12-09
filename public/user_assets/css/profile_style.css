@@ -25,6 +25,17 @@ body {
 .line-divider {
     border: 2px solid rgb(195, 195, 19);
 }
+.checked {
+    color: yellow;
+}
+.p-1 {
+    margin-top: 50px;
+}
+
+/* Navbar Style */
+.box-shadow-y {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
 
 /* Hero Styles */
 .hero-body h1 {
@@ -60,5 +71,17 @@ body {
 /* Mobile Version */
 @media (min-width: 320px) and (max-width: 1000px) {
 
+    /* Button Styles */
+    .reset-button {
+        width: 100%;
+    }
+    .fullwidth-button {
+        width: 100%;
+    }
+
+    /* Hero Styles */
+    .hero-content {
+        margin-top: 45%;
+    }
 
 }

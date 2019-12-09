@@ -73,7 +73,7 @@ class FoodController extends Controller
 
         $action_type = 'tambah';
 
-        return view('admin.form_makanan', compact('chefs', 'action_type'));
+        return view('admin.form.form_makanan', compact('chefs', 'action_type'));
     }
 
     /**
@@ -91,7 +91,7 @@ class FoodController extends Controller
             'nama_makanan' => 'required|max:50',
             'rating' => 'required',
             'desk_makanan' => 'required|max:250',
-            'harga_makanan' => 'required|numeric|digits_between:1,15',
+            'harga_makanan' => 'required|numeric',
             'gambar_makanan' => 'required|image|mimes:jpeg,png,jpg|max:5000'
         ]);
 
@@ -108,7 +108,7 @@ class FoodController extends Controller
     
         $file_name = $request->nama_makanan . '.' . $file->getClientOriginalExtension();
 
-        $file->move(public_path('user_assets/images/food/' . $folder_name), $file_name);
+        $file->move(public_path('user_assets\images\food\\' . $folder_name), $file_name);
 
         Food::create([
             'user_id' => $request->pemilik_makanan,
@@ -149,7 +149,7 @@ class FoodController extends Controller
 
         $action_type = 'ubah';
 
-        return view('admin.form_makanan', compact('foods', 'chefs', 'action_type'));
+        return view('admin.form.form_makanan', compact('foods', 'chefs', 'action_type'));
     }
 
     /**
@@ -170,7 +170,7 @@ class FoodController extends Controller
             'nama_makanan' => 'required|max:50',
             'rating' => 'required',
             'desk_makanan' => 'required|max:250',
-            'harga_makanan' => 'required|numeric|digits_between:1,15',
+            'harga_makanan' => 'required|numeric',
             'gambar_makanan' => 'image|mimes:jpeg,png,jpg|max:5000'
         ]);
 
@@ -202,14 +202,18 @@ class FoodController extends Controller
 
                 $current_file = $food->image;
 
-                $old_file = public_path("chef_images\\food_pictures\\" . $current_file);
+                if($current_file != null) {
+                    
+                    $old_file = public_path("chef_images\\food_pictures\\" . $current_file);
 
-                if(file_exists($old_file)) {
+                    if(file_exists($old_file)) {
 
-                    unlink($old_file);
+                        unlink($old_file);
+                    }
+
                 }
 
-                $file->move(public_path('chef_images/food_pictures'), $file_name);
+                $file->move(public_path('chef_images\food_pictures'), $file_name);
 
                 $food->image = $file_name;
 

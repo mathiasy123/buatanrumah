@@ -1,4 +1,4 @@
-@extends('chef_layout.master_dashboard')
+@extends('chef_layout.master')
 
 @section('title', 'Pemasak | Lihat Pemesanan Yang Selesai')
 
@@ -33,7 +33,7 @@
                     </form>
                 </div>
                 <div class="column is-2-desktop is-12-mobile">
-                    <a href="/pemasak/pemesanan" class="button reset-button is-danger is-rounded is-fullwidth-mobile is-medium">Reset Pencarian</a>
+                    <a href="/pemasak/pemesanan-selesai" class="button reset-button is-danger is-rounded is-fullwidth-mobile is-medium">Reset Pencarian</a>
                 </div>
             </div>
             <!-- End Search Order Table -->
@@ -66,7 +66,7 @@
                                 <th>Telepon Pemesan</th>
                                 <th>Jumlah Pesanan</th>
                                 <th>Total Harga Pemesanan</th>
-                                <th>Aksi</th>
+                                <th>Status</th>
                             </thead>
                             <tbody>
                                 
@@ -78,6 +78,7 @@
                                     <td>{{ $finished_order->customer_phone }}</td>
                                     <td>{{ $finished_order->quantity }}</td>
                                     <td>{{ number_format($finished_order->total_price) }}</td>
+                                    <td><strong class="has-text-success">{{ ($finished_order->finished == 1) ? 'Selesai' : ''}}</strong></td>
                                 </tr>
                                 @endforeach
 
@@ -85,7 +86,7 @@
                         </table>
                     </div>
 
-                    {{ $order->links() }}
+                    {{ $finished_orders->links() }}
 
                     @endif
 

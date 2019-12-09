@@ -36,6 +36,14 @@
             </div>
             @endif
 
+            @if($action_type == 'tambah')
+            
+            <div class="content">
+                <h3 class="has-text-centered flash-message">-- Maaf, belum ada konten --</h3>
+            </div>
+
+            @else
+
             <!-- Content Management Hero Section -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
@@ -140,6 +148,8 @@
                 </div>
             </div>
             <!-- End Content Management Video Kami Section -->
+
+            @endif
 
         </div>
     </div>

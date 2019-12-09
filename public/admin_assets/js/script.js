@@ -36,15 +36,72 @@ $(document).ready(function () {
     });
 
     // Script For Retrieve File Name
-    $("input[type='file']").change(function (event) {
+    $(".user-file").change(function (event) {
 
         let media_source = event.target.files[0];
 
         let url_media = URL.createObjectURL(media_source);
 
-        $(".file-name-here").text(media_source.name);
+        $(".file-name-user").text(media_source.name);
 
-        document.querySelector(".new-media").src = url_media;
+        document.querySelector(".new-media-user").src = url_media;
+
+    });
+    $(".vendor-file").change(function (event) {
+
+        let media_source = event.target.files[0];
+
+        let url_media = URL.createObjectURL(media_source);
+
+        $(".file-name-vendor").text(media_source.name);
+
+        document.querySelector(".new-media-vendor").src = url_media;
+
+    });
+    $(".video-file").change(function (event) {
+
+        let media_source = event.target.files[0];
+
+        let url_media = URL.createObjectURL(media_source);
+
+        $(".file-name-video").text(media_source.name);
+
+        document.querySelector(".new-media-video").src = url_media;
+
+    });
+    $(".hero-file").change(function (event) {
+
+        let media_source = event.target.files[0];
+
+        let url_media = URL.createObjectURL(media_source);
+
+        $(".file-name-hero").text(media_source.name);
+
+        document.querySelector(".new-media-hero").src = url_media;
+
+    });
+
+    $(".about-file").change(function (event) {
+
+        let media_source = event.target.files[0];
+
+        let url_media = URL.createObjectURL(media_source);
+
+        $(".file-name-about").text(media_source.name);
+
+        document.querySelector(".new-media-about").src = url_media;
+
+    });
+    $(".food-file").change(function (event) {
+
+        let media_source = event.target.files[0];
+
+        let url_media = URL.createObjectURL(media_source);
+
+        $(".file-name-food").text(media_source.name);
+
+        document.querySelector(".new-media-food").src = url_media;
+
     });
 
     // Close The Nofitication

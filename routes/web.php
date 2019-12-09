@@ -57,6 +57,12 @@ Route::prefix('admin')->group(function () {
     Route::put('/ubah/pemasak-makanan', 'FoodController@update');
 
     Route::get('/pemasak-profil', 'AdminController@chefProfile');
+    Route::post('/pemasak-profil', 'A    dminController@chefProfile');
+
+    Route::get('/tambah/pemasak-profil', 'ProfileController@create');
+    Route::post('/tambah/pemasak-profil', 'ProfileController@store');
+    Route::get('/ubah/pemasak-profil/{profile_id}', 'ProfileController@edit');
+    Route::put('/ubah/pemasak-profil', 'ProfileController@update');
 
     Route::get('/logout', 'Auth\AdminLoginController@adminLogout');
 });
@@ -86,6 +92,7 @@ Route::prefix('pemasak')->group(function () {
     
     Route::get('/pemesanan', 'OrderController@index');
     Route::post('/pemesanan', 'OrderController@index');
+    Route::put('/ubah/pemesanan/{order_id}', 'OrderController@update');
 
     Route::get('/detail/pemesanan/{order_id}', 'OrderController@show');
 
@@ -94,8 +101,8 @@ Route::prefix('pemasak')->group(function () {
 
     Route::prefix('profil')->group(function () {
 
-        Route::get('/order/food/{food_id}', 'OrderController@create');
-        Route::post('/store', 'OrderController@store');
+        Route::get('/pesan/makanan/{food_id}', 'OrderController@create');
+        Route::post('/pesan/makanan', 'OrderController@store');
 
         Route::get('/{user_id}', 'ProfileController@index');
         Route::post('/{user_id}', 'ProfileController@index');

@@ -77,7 +77,7 @@ class VendorContentController extends Controller
                 break;
         }
 
-        return view('admin.form_konten', compact('vendor_content', 'content_to_update', 'content_name'));
+        return view('admin.form.form_konten', compact('vendor_content', 'content_to_update', 'content_name'));
     }
 
     /**
@@ -118,7 +118,7 @@ class VendorContentController extends Controller
     
                 $file_name = 'gambar-hero' . '.' . $file->getClientOriginalExtension();
     
-                $file->move(public_path('vendor_assets/images'), $file_name);
+                $file->move(public_path('vendor_assets\images'), $file_name);
     
                 $vendor_data->hero_image = $file_name;
     
@@ -144,7 +144,7 @@ class VendorContentController extends Controller
 
             $vendor_data->save();
 
-            session()->flash('tentang_notif', 'Konten tentang berhasil dibuat/diubah');
+            session()->flash('tentang_notif', 'Konten tentang berhasil diubah');
 
         } else {
 
@@ -160,13 +160,13 @@ class VendorContentController extends Controller
     
                 $file_name = 'video-kami' . '.' . $file->getClientOriginalExtension();
     
-                $file->move(public_path('vendor_assets/videos'), $file_name);
+                $file->move(public_path('vendor_assets\videos'), $file_name);
     
                 $vendor_data->video = $file_name;
     
                 $vendor_data->save();
 
-                session()->flash('video_notif', 'Konten video berhasil dibuat/diubah');
+                session()->flash('video_notif', 'Konten video berhasil diubah');
     
             } else {
     

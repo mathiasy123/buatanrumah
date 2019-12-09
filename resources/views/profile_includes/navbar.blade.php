@@ -1,8 +1,8 @@
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item">
-                <strong>Buatan Rumah</strong>
+            <a href="#beranda" class="navbar-item menu-scroll">
+                <strong>{{ $profile->user->name }}</strong>
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="navbar-menu">
-            <div class="navbar-end has-text-white">
+            <div class="navbar-end has-text-centered has-text-white">
                 <a href="#beranda" class="navbar-item menu-scroll">
                     Beranda
                 </a>
@@ -22,27 +22,20 @@
                     Tentang
                 </a>
 
-                <a href="#video" class="navbar-item menu-scroll">
-                    Video
-                </a>
-
-                <a href="#anggota" class="navbar-item menu-scroll">
-                    Anggota
-                </a>
-
-                <a href="#pelayanan" class="navbar-item menu-scroll">
-                    Pelayanan
+                <a href="#makanan" class="navbar-item menu-scroll">
+                    Makanan
                 </a>
 
                 <a href="#kontak" class="navbar-item menu-scroll">
                     Kontak
                 </a>
+
             </div>
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a href="/register" class="button is-warning is-outlined is-fullwidth is-rounded has-text-black">
-                        Daftar Sebagai Anggota
+                    <a href="#makanan" class="button is-warning is-outlined is-fullwidth is-rounded has-text-black menu-scroll">
+                        Pesan Makanan
                     </a>
                 </div>
             </div>

@@ -38,16 +38,6 @@ class Food extends Model
      */
     public function order()
     {
-        return $this->belongsTo('App\Order', 'food_id');
-    }
-
-    /**
-     * Set the Food and Profile relation.
-     *
-     * Many to One Relation (Food => Profile)
-     */
-    public function profile()
-    {
-        return $this->belongsTo('App\Profile');
+        return $this->hasOne('App\Order');
     }
 }

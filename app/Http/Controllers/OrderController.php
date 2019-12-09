@@ -10,6 +10,8 @@ use App\Order;
 
 use App\Food;
 
+use App\Profile;
+
 class OrderController extends Controller
 {
     /**
@@ -37,7 +39,9 @@ class OrderController extends Controller
 
         $orders = Order::where('user_id', auth('web')->user()->id)
                     ->when($request->order_keyword, function($query) use ($request){
-                        $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%');
+                        $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%')
+                        ->orWhere('customer_name', 'like', '%' . strip_tags($request->order_keyword) . '%')
+                        ->orWhere('customer_phone', 'like', '%' . strip_tags($request->order_keyword) . '%');
                     })
                     ->paginate(10);
         
@@ -70,7 +74,11 @@ class OrderController extends Controller
         $finished_orders = Order::where('user_id', auth('web')->user()->id)
                                 ->where('finished', 1)
                                 ->when($request->order_keyword, function($query) use ($request){
-                                    $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%');
+                                    $query->where('order_code', 'like', '%' . strip_tags($request->order_keyword) . '%')
+                                    ->orWhere('customer_name', 'like', '%' . strip_tags($request->order_keyword) . '%')
+                                    ->orWhere('customer_phone', 'like', '%' . strip_tags($request->order_keyword) . '%')
+                                    ->orWhere('quantity', '=', $request->order_keyword)
+                                    ->orWhere('total_price', 'like', '%' . $request->order_keyword . '%');
                                 })
                                 ->paginate(10);
         
@@ -95,9 +103,11 @@ class OrderController extends Controller
      */
     public function create($food_id)
     {
-        $food = Food::where('food_id', $food_id)->first();
+        $food = Food::find($food_id);
 
-        return view('chef.form_order', compact('food'));
+        $profile = Profile::where('user_id', $food->user_id)->first();
+
+        return view('profile.form_order', compact('profile', 'food'));
     }
 
     /**
@@ -109,28 +119,38 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'nomor_telepon' => 'required|numeric|digits_between:9,15',
-            'alamat_rumah' => 'required|max:150',
-            'jumlah' => 'required|numeric'
+            'nama_lengkap' => 'required',
+            'nomor_telp' => 'required|numeric|digits_between:9,15',
+            'harga_makanan' => 'required',
+            'jumlah' => 'required|numeric',
+            'alamat' => 'required'
         ]);
 
-        $order_code = strtolower(Str::random(9));
+        $kode = strtolower(Str::random(9));
+
+        $total = $request->jumlah * $request->harga_makanan;
         
         Order::create([
             'user_id' => $request->user_id,
             'food_id' => $request->food_id,
-            'order_code' => $order_code,
-            'customer_name' => strtolower(strip_tags($request->nama)),
-            'customer_phone' => $request->nomor_telepon,
-            'customer_address' => strtolower($request->alamat_rumah),
+            'order_code' => $kode,
+            'customer_name' => strtolower(strip_tags($request->nama_lengkap)),
+            'customer_phone' => $request->nomor_telp,
+            'customer_address' => strtolower($request->alamat),
             'quantity' => $request->jumlah,
-            'total_price' => $request->jumlah * $request->harga
+            'total_price' => $total,
+            'finished' => 0
         ]);
 
-        session()->flash('order_notif', $order_code);
+        
+        $flash_data = [
+            'kode' => $kode,
+            'total' => $total
+        ];
 
-        return redirect("/profile/$request->user_id");
+        session()->flash('order_notif', $flash_data);
+
+        return redirect("/pemasak/profil/$request->user_id");
     }
 
     /**
@@ -141,9 +161,7 @@ class OrderController extends Controller
      */
     public function show($order_id)
     {
-        $order_details = Order::with('food')->where('orders.id', $order_id)->get();
-
-        dd($order_details);
+        $order_details = Order::where('id', $order_id)->with('food')->first();
 
         return view('chef.order_detail', compact('order_details'));
     }
@@ -166,9 +184,17 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($order_id)
     {
-        //
+        $order = Order::find($order_id);
+
+        $order->finished = 1;
+
+        $order->save();
+
+        session()->flash('order_status', 'Pemesanan sudah diselesaikan, silahkan periksa menu pemesanan yang selesai');
+
+        return redirect('/pemasak/pemesanan');
     }
 
     /**

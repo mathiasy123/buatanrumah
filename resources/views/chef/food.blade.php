@@ -1,4 +1,4 @@
-@extends('chef_layout.master_dashboard')
+@extends('chef_layout.master')
 
 @section('title', 'Pemasak | Lihat Makanan')
 
@@ -61,27 +61,24 @@
                         <table class="table table-data is-hoverable is-fullwidth">
                             <thead>
                                 <th>#</th>
-                                <th>Nama Pemilik Makanan</th>
                                 <th>Nama Makanan</th>
                                 <th>Foto Makanan</th>
                                 <th>Rating Makanan</th>
                                 <th>Deskripsi Makanan</th>
                                 <th>Harga Makanan</th>
-                                <th>Aksi</th>
                             </thead>
                             <tbody>
                                 
                                 @foreach($foods as $index => $food)
                                 <tr>
                                     <td>{{ $index + $foods->firstItem() }}</td>
-                                    <td>{{ ucwords($food->user->name) }}</td>
                                     <td>{{ ucwords($food->food_name) }}</td>
                                     <td>
                                         <img src="{{ asset('user_assets/images/food/' . $food->user_id . '/' . $food->image) }}" width="150" height="140" alt="Foto Makanan">
                                     </td>
                                     <td>{{ $food->rating }}</td>
                                     <td>{{ $food->description }}</td>
-                                    <td>{{ $food->price }}</td>
+                                    <td>Rp. {{ number_format($food->price) }}</td>
                                 </tr>
                                 @endforeach
 

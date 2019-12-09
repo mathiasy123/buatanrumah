@@ -37,6 +37,6 @@ class Order extends Model
      */
     public function food()
     {
-        return $this->hasOne('App\Food', 'id');
+        return $this->belongsTo('App\Food');
     }
 }

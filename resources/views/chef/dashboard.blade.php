@@ -1,4 +1,4 @@
-@extends('chef_layout.master_dashboard')
+@extends('chef_layout.master')
 
 @section('title', 'Pemasak | Dashboard')
 
@@ -78,7 +78,6 @@
                         <table class="table table-data is-hoverable is-fullwidth">
                             <thead>
                                 <th>#</th>
-                                <th>Pemilik Makanan</th>
                                 <th>Nama Makanan</th>
                                 <th>Rating Makanan</th>
                                 <th>Deskripsi Makanan</th>
@@ -92,7 +91,7 @@
                                     <td>{{ ucwords($food->food_name) }}</td>
                                     <td>{{ $food->rating }}</td>
                                     <td>{{ $food->description }}</td>
-                                    <td>{{ $food->price }}</td>
+                                    <td>Rp. {{ number_format($food->price) }}</td>
                                 </tr>
                                 @endforeach
 
@@ -132,13 +131,13 @@
                             </thead>
                             <tbody>
 
-                                @foreach($finished_orders as $finished_order)
+                                @foreach($orders as $order)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ ucwords($finished_order->order_code) }}</td>
-                                    <td>{{ $finished_order->customer_name }}</td>
-                                    <td>{{ $finished_order->quantity }}</td>
-                                    <td>{{ $finished_order->total_price }}</td>
+                                    <td>{{ ucwords($order->order_code) }}</td>
+                                    <td>{{ $order->customer_name }}</td>
+                                    <td>{{ $order->quantity }}</td>
+                                    <td>{{ $order->total_price }}</td>
                                 </tr>
                                 @endforeach
 
@@ -149,7 +148,7 @@
             </div>
             <!-- End Chef's Order Table -->
 
-            <!-- Title Chef's Order Table -->
+            <!-- Title Chef's Finished Order Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
                     <div class="level">
@@ -178,13 +177,13 @@
                             </thead>
                             <tbody>
 
-                                @foreach($orders as $order)
+                                @foreach($finished_orders as $finished_order)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ ucwords($order->order_code) }}</td>
-                                    <td>{{ $order->customer_name }}</td>
-                                    <td>{{ $order->quantity }}</td>
-                                    <td>{{ $order->total_price }}</td>
+                                    <td>{{ ucwords($finished_order->order_code) }}</td>
+                                    <td>{{ $finished_order->customer_name }}</td>
+                                    <td>{{ $finished_order->quantity }}</td>
+                                    <td>{{ $finished_order->total_price }}</td>
                                 </tr>
                                 @endforeach
 
@@ -193,7 +192,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End Chef's Order Table -->
+            <!-- End Chef's Finished Order Table -->
 
         </div>
     </div>

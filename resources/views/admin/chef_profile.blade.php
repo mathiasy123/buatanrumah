@@ -11,6 +11,7 @@
             <div class="columns is-variable is-desktop">
                 <div class="column">
                     <h1 class="title">Data Konten Profil Pemasak</h1>
+                    <a href="/admin/tambah/pemasak-profil" class="button is-success is-rounded is-fullwidth-mobile is-medium">Tambah Profil Pemasak</a>
                 </div>
             </div>
             <!-- End Title Re-Seller Account Table -->
@@ -38,6 +39,13 @@
             </div>
             <!-- End Search Re-Seller Account Table -->
 
+            @if(session('profile_notif'))
+            <div class="notification is-success">
+                <button class="delete"></button>
+                {{ @session('profile_notif') }}
+            </div>
+            @endif
+
             <!-- Re-Seller Account Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
@@ -55,7 +63,7 @@
                             <thead>
                                 <th>#</th>
                                 <th>Nama Pemilik Profil</th>
-                                <th>Jumlah Makanan</th>
+                                <th>Tangggal Dibuat</th>
                                 <th>Aksi</th>
                             </thead>
                             <tbody>
@@ -64,7 +72,16 @@
                                 <tr>
                                     <td>{{ $index + $profiles->firstItem() }}</td>
                                     <td>{{ ucwords($profile->user->name) }}</td>
-                                    <td>{{ $count_food }}</td>
+                                    <td>{{ $profile->created_at }}</td>
+
+                                    <td>
+                                        <a href="/admin/ubah/pemasak-profil/{{ $profile->id }}" class="button is-warning">
+                                            <span class="icon">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </span>
+                                            <span>Ubah</span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
 
@@ -72,7 +89,7 @@
                         </table>
                     </div>
 
-                    {{ $resellers->links() }}
+                    {{ $profiles->links() }}
 
                     @endif
 

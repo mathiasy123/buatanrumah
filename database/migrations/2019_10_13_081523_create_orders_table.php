@@ -25,9 +25,6 @@ class CreateOrdersTable extends Migration
             $table->integer('total_price');
             $table->smallInteger('finished');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('food_id')->references('id')->on('foods');
         });
     }
 

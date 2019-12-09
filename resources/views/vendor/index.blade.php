@@ -104,7 +104,7 @@
     </section>
     <!-- End Anggota Section -->
     
-    <!-- Kontak Section -->
+    <!-- Pelayanan Section -->
     <section class="section has-background-light" id="pelayanan">
         <div class="container is-fluid">
             <div class="columns is-variable is-desktop">
@@ -136,6 +136,6 @@
             </div>
         </div>        
     </section>
-    <!-- End Kontak Section -->
+    <!-- End Pelayanan Section -->
 </div>
 @endsection

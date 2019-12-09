@@ -1,4 +1,4 @@
-@extends('chef_layout.master_dashboard')
+@extends('chef_layout.master')
 
 @section('title', 'Pemasak | Lihat Pemesanan')
 
@@ -45,6 +45,13 @@
             </div>
             @endif
 
+            @if(session('order_status'))
+            <div class="notification is-success">
+                <button class="delete"></button>
+                {{ @session('order_status') }}
+            </div>
+            @endif
+
             <!-- Order Table -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
@@ -76,13 +83,30 @@
                                     <td>{{ $order->customer_phone }}</td>
 
                                     <td>
-                                        <div class="control">
-                                            <a href="/pemasak/detail/pemesanan/{{ $order->id }}" class="button is-info">
-                                                <span class="icon">
-                                                    <i class="fas fa-info-circle"></i>
-                                                </span>
-                                                <span>Lihat Detail</span>
-                                            </a> 
+                                        <div class="field is-grouped">
+                                            <div class="control">
+                                                <a href="/pemasak/detail/pemesanan/{{ $order->id }}" class="button is-info">
+                                                    <span class="icon">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </span>
+                                                    <span>Lihat Detail</span>
+                                                </a> 
+                                            </div>
+
+                                            <div class="control">
+                                                <form action="/pemasak/ubah/pemesanan/{{ $order->id }}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    
+                                                    <button type="submit" class="button is-success" {{ ($order->finished == 1) ? 'disabled' : '' }}>
+                                                        <span class="icon">
+                                                            <i class="fas fa-check"></i>
+                                                        </span>
+                                                        <span>Selesaikan Pemesanan</span>
+                                                    </button> 
+                                                    
+                                                </form>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

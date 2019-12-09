@@ -22,8 +22,6 @@ class CreateFoodsTable extends Migration
             $table->string('image', 50);
             $table->integer('price');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

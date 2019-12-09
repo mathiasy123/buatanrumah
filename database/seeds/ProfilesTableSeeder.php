@@ -18,12 +18,12 @@ class ProfilesTableSeeder extends Seeder
         $faker = Faker::create('id_ID');
 
         Profile::create([
-            'user_id' => $faker->numberBetween(1, 20),
+            'user_id' => 1,
             'hero_image' => 'gambar-hero.jpg',
             'title_hero' => $faker->name,
             'subtitle_hero' => 'Pemasak Chinnese Food',
             'cathering_name' => 'Chinnese Food 81',
-            'title_about' => 'Tentang ' . $faker->name,
+            'title_about' => $faker->name,
             'text_about' => 'fjwjfwdfwfnhkjfnbsdkjfnkjsdnbkjsdnfbjfhndfjkwnbjknjwfnfnwfnnjnwknfjnjfnwfnkfnfnjnkjnfwjfnwjfnwjfnwjkfnwfnwkfnwfknwkjfnwkjfnwknfwjknfkfnwjkfnwjdkfnwjkfnwkfnwkfnjkfn',
             'about_image' => 'gambar-about.jpg'
         ]);

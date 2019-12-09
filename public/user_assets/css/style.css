@@ -20,6 +20,12 @@ hr {
 .flash-message {
     margin-top: 50px;
 }
+.checked {
+    color: yellow;
+}
+.space-top {
+    margin-top: 40px;
+}
 
 /* Icon Style */
 .icon {

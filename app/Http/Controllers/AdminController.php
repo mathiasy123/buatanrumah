@@ -130,7 +130,19 @@ class AdminController extends Controller
     {
         $vendor_content = VendorContent::first();
 
-        return view('admin.buatan_rumah', compact('vendor_content'));
+        if($vendor_content) {
+
+            $action_type = 'ubah';
+            
+            return view('admin.buatan_rumah', compact('vendor_content', 'action_type'));
+
+        } else {
+
+            $action_type = 'tambah';
+            
+            return view('admin.buatan_rumah', compact('action_type'));
+        }
+
     }
 
     /**
@@ -149,24 +161,23 @@ class AdminController extends Controller
         $profiles = Profile::when($request->profile_keyword, function($query) use($request) {
                     $query->WhereHas('user', function($query) use($request) {
                         $query->where('name', 'like', '%' . strip_tags($request->profile_keyword) . '%');
-                    });
+                    })
+                    ->orWhere('created_at', 'like', '%' . strip_tags($request->profile_keyword) . '%');
                 })
                 ->latest()
                 ->paginate(6);  
 
         $profiles->appends($request->only('profile_keyword'));
 
-        dd($profiles->user->name);
-
         if(count($profiles)) {
 
-            return view('admin.chef_profile');
+            return view('admin.chef_profile', compact('profiles'));
 
         } else {
             
             session()->flash('profile_not_found', 'Maaf, data profil pemasak yang Anda dicari tidak ada');
             
-            return view('admin.chef_profile');
+            return view('admin.chef_profile', compact('profiles'));
         }
         
     }
