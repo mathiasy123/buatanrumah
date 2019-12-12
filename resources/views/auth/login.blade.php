@@ -49,7 +49,7 @@
                                     <p class="help is-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <p class="info-sign">Belum memiliki akun? <a href="/register">Daftar Akun</a> disini!</p>
+                                <p class="info-sign">Belum memiliki akun? <a href="https://wa.me/628999000697?text=Saya%20ingin%20bergabung">Dapatkan</a> disini!</p>
                                 <div class="button-center">
                                     <button type="submit" class="login-button button is-outlined is-warning is-rounded">
                                         <strong>Log In</strong>

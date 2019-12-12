@@ -11,13 +11,6 @@
 |
 */
 
-/**
- * Registration Routes
- */
-Route::prefix('register')->group(function () {
-    Route::get('/', 'Auth\RegisterController@showRegistrationForm');
-    Route::post('/', 'Auth\RegisterController@register');
-});
 
 /**
  * Admin (CMS) Login And Other Routes
@@ -31,6 +24,9 @@ Route::prefix('admin')->group(function () {
     
     Route::get('/pemasak', 'AdminController@chef');
     Route::post('/pemasak', 'AdminController@chef');
+
+    Route::get('/tambah/pemasak', 'UserController@create');
+    Route::post('/tambah/pemasak', 'UserController@store');
 
     Route::get('/ubah/pemasak/{user_id}', 'UserController@edit');
     Route::put('/ubah/pemasak', 'UserController@update');

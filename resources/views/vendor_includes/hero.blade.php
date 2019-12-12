@@ -3,11 +3,11 @@
         <div class="content has-text-centered">
             <h1 class="has-text-white text-shadow">Buatan Rumah</h1>
             
-            <h5 class="has-text-white space-bottom">{{ $vendor_content->subtitle_hero }}</h5>
+            <h5 class="has-text-white space-bottom text-shadow">{{ $vendor_content->subtitle_hero }}</h5>
 
-            <h6 class="text-x wrap-text has-text-white space-bottom">{{ $vendor_content->text_hero }}</h6>
+            <h6 class="text-x wrap-text has-text-white space-bottom text-shadow">{{ $vendor_content->text_hero }}</h6>
 
-            <button class="button is-medium is-warning is-rounded space-bottom">Jadilah Anggota Kami</button>
+            <a href="https://wa.me/628999000697?text=Saya%20ingin%20bergabung" class="button is-medium is-warning is-rounded space-bottom">Jadilah Anggota Kami</a>
         </div>
     </div>
     <div id="carousel" class="hero-carousel">

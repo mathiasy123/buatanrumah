@@ -41,7 +41,7 @@
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a href="/register" class="button is-warning is-outlined is-fullwidth is-rounded has-text-black">
+                    <a href="https://wa.me/628999000697?text=Saya%20ingin%20bergabung" target="_blank" class="button is-warning is-outlined is-fullwidth is-rounded has-text-black">
                         Daftar Sebagai Anggota
                     </a>
                 </div>

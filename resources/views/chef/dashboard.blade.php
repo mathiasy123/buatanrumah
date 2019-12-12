@@ -64,7 +64,7 @@
                             <h1 class="title">Data Makanan</h1>
                         </div>
                         <div class="level-right">
-                            <a href="/pemasak/makanan" class="button overview-detail is-link is-rounded">Lihat Lebih Detail</a>
+                            <a href="/pemasak/makanan" class="button overview-detail is-link is-rounded is-fullwidth-mobile">Lihat Lebih Detail</a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                             <h1 class="title">Data Pemesanan</h1>
                         </div>
                         <div class="level-right">
-                            <a href="/pemasak/pemesanan" class="button overview-detail is-link is-rounded">Lihat Lebih Detail</a>
+                            <a href="/pemasak/pemesanan" class="button overview-detail is-link is-rounded is-fullwidth-mobile">Lihat Lebih Detail</a>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                             <h1 class="title">Data Pemesanan Yang Selesai</h1>
                         </div>
                         <div class="level-right">
-                            <a href="/pemasak/pemesanan-selesai" class="button overview-detail is-link is-rounded">Lihat Lebih Detail</a>
+                            <a href="/pemasak/pemesanan-selesai" class="button overview-detail is-link is-rounded is-fullwidth-mobile">Lihat Lebih Detail</a>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                                 @foreach($finished_orders as $finished_order)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ ucwords($finished_order->order_code) }}</td>
+                                    <td>{{ strtoupper($finished_order->order_code) }}</td>
                                     <td>{{ $finished_order->customer_name }}</td>
                                     <td>{{ $finished_order->quantity }}</td>
                                     <td>{{ $finished_order->total_price }}</td>

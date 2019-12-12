@@ -23,6 +23,18 @@ class ProfileController extends Controller
 
         $this->middleware('auth:admin')->except('index');
     }
+
+    /**
+     * Convert phone number format.
+     *
+     * @return void
+     */
+    public function convertPhone($phone_number)
+    {
+        if(substr(trim($phone_number), 0, 1) == '0') {
+            return '62' . substr(trim($phone_number), 1); 
+        }
+    }
     
     /**
      * Display a listing of the resource.
@@ -39,6 +51,8 @@ class ProfileController extends Controller
 
         $profile = Profile::where('user_id', $user_id)->with('user')->first();
 
+        $whatsapp_number = $this->convertPhone($profile->user->phone_call);
+
         $foods = Food::where('user_id', $user_id)
                     ->when($request->food_keyword, function($query) use($request){
                         $query->where('food_name', 'like', '%' . strip_tags($request->food_keyword) . '%')
@@ -49,16 +63,24 @@ class ProfileController extends Controller
         
         $foods->appends($request->only('food_keyword'));
 
-        if(count($foods)) {
+        if(!empty($profile)) {
 
-            return view('profile.index', compact('profile', 'foods'));
+            if(count($foods)) {
 
-        }else {
+                return view('profile.index', compact('profile', 'foods', 'whatsapp_number'));
+    
+            }else {
+                
+                session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
+                
+                return view('profile.index', compact('profile', 'foods', 'whatsapp_number'));
+            }
+
+        } else {
+
+            return view('profile.empty');
             
-            session()->flash('food_not_found', 'Maaf, makanan yang Anda dicari tidak ada');
-            
-            return view('profile.index', compact('profile', 'foods'));
-        }
+        }     
     }
 
     /**

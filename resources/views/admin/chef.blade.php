@@ -11,6 +11,7 @@
             <div class="columns is-variable is-desktop">
                 <div class="column">
                     <h1 class="title">Data Akun Pemasak</h1>
+                    <a href="/admin/tambah/pemasak" class="button is-success is-rounded is-fullwidth-mobile is-medium">Tambah Akun Pemasak</a>
                 </div>
             </div>
             <!-- End Title Chef Account Table -->

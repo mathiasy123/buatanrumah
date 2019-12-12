@@ -31,7 +31,137 @@
             </div>
             <!-- End Title Form Page -->
 
-            <!-- Edit Food Form Section -->
+            @if($action_type == 'tambah')
+
+            <!-- Add Chef Form Section -->
+            <div class="columns is-variable is-desktop">
+                <div class="column">
+                    <div class="card has-background-light">
+                        <div class="card-header">
+                            <div class="card-header-title">
+                                <p class="is-size-5">Form Tambah Akun Pemasak</p> 
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                
+                                <p>Form ini adalah untuk menambahkan akun pemasak</p>
+
+                                <div class="content">
+                                    <form method="post" action="/admin/tambah/pemasak" enctype="multipart/form-data">
+                                        @csrf
+
+                                        <div class="field">
+                                            <label class="label">Nama Pemasak</label>
+                                            <div class="control">
+                                                <input class="input @error('nama_pemasak') is-danger @enderror" name="nama_pemasak" value="{{ old('nama_pemasak') }}" type="text" placeholder="Masukkan Nama Pemasak">
+                                            </div>
+                                            @error('nama_pemasak')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Email Pemasak</label>
+                                            <div class="control">
+                                                <input class="input @error('email_pemasak') is-danger @enderror" name="email_pemasak" value="{{ old('email_pemasak') }}" type="text" placeholder="Masukkan Email Pemasak">
+                                            </div>
+                                            @error('email_pemasak')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Nomor Telepon (WA) Pemasak</label>
+                                            <div class="control">
+                                                <input class="input @error('nomor_telepon') is-danger @enderror" name="nomor_telepon" value="{{ old('nomor_telepon') }}" type="number" placeholder="Masukkan Email Pemasak">
+                                            </div>
+                                            @error('nomor_telepon')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Alamat Pemasak</label>
+                                            <div class="control">
+                                                <textarea class="textarea @error('alamat_pemasak') is-danger @enderror" name="alamat_pemasak">{{ old('alamat_pemasak') }}</textarea>
+                                            </div>
+                                            @error('alamat_pemasak')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Instagram Pemasak</label>
+                                            <div class="control">
+                                                <input class="input @error('instagram_pemasak') is-danger @enderror" name="instagram_pemasak" value="{{ old('instagram_pemasak') }}" type="text" placeholder="Masukkan Instagram Pemasak">
+                                            </div>
+                                            @error('instagram_pemasak')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Password Pemasak</label>
+                                            <div class="control">
+                                                <input class="input @error('password') is-danger @enderror" name="password" value="{{ old('password') }}" type="password" placeholder="Masukkan Password Pemasak">
+                                            </div>
+                                            @error('password')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Konfirmasi Password Pemasak</label>
+                                            <div class="control">
+                                                <input class="input @error('password_confirmation') is-danger @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" type="password" placeholder="Masukkan Konfirmasi Password Pemasak">
+                                            </div>
+                                            @error('password_confirmation')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="field">
+                                            <label class="label">Foto Pemasak (File harus berupa format gambar dan maksimal 5 MB)</label> 
+                                            <div class="file has-name is-fullwidth @error('gambar_makanan') is-danger @enderror">
+                                                <label class="file-label">
+                                                    <input class="file-input user-file" type="file" name="gambar_pemasak">
+                                                    <span class="file-cta">
+                                                        <span class="file-icon">
+                                                            <i class="fas fa-upload"></i>
+                                                        </span>
+                                                        <span class="file-label">
+                                                            Pilih file gambar . . .  
+                                                        </span>
+                                                    </span>
+                                                    <span class="file-name">
+                                                        <span class="file-name-user"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            @error('gambar_pemasak')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                            @enderror
+                                            <figure class="image is-4by3">
+                                                <img class="new-media-user" src="https://bulma.io/images/placeholders/480x480.png">
+                                            </figure>
+                                        </div>
+
+                                        <button type="submit" class="button is-info is-medium is-rounded is-fullwidth">Tambah Akun Pemasak</button>
+
+                                    </form>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Add Chef Form Section -->
+
+            @else
+
+            <!-- Edit Chef Form Section -->
             <div class="columns is-variable is-desktop">
                 <div class="column">
                     <div class="card has-background-light">
@@ -43,7 +173,7 @@
                         <div class="card-content">
                             <div class="content">
                                 
-                                <p>Form ini adalah untuk mengubah/meng-update data akun pemasak</p>
+                                <p>Form ini adalah untuk mengubah data akun pemasak</p>
 
                                 <div class="content">
                                     <form method="post" action="/admin/ubah/pemasak" enctype="multipart/form-data">
@@ -75,9 +205,9 @@
                                         <div class="field">
                                             <label class="label">Nomor Telepon (WA) Pemasak</label>
                                             <div class="control">
-                                                <input class="input @error('telp_pemasak') is-danger @enderror" name="telp_pemasak" value="{{ (old('telp_pemasak')) ? old('telp_pemasak') : $chefs->phone_call }}" type="number" placeholder="Masukkan Email Pemasak">
+                                                <input class="input @error('nomor_telepon') is-danger @enderror" name="nomor_telepon" value="{{ (old('nomor_telepon')) ? old('nomor_telepon') : $chefs->phone_call }}" type="number" placeholder="Masukkan Email Pemasak">
                                             </div>
-                                            @error('telp_pemasak')
+                                            @error('nomor_telepon')
                                             <p class="help is-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -95,9 +225,9 @@
                                         <div class="field">
                                             <label class="label">Instagram Pemasak</label>
                                             <div class="control">
-                                                <input class="input @error('ig_pemasak') is-danger @enderror" name="ig_pemasak" value="{{ (old('ig_pemasak')) ? old('ig_pemasak') : $chefs->instagram }}" type="text" placeholder="Masukkan Instagram Pemasak">
+                                                <input class="input @error('instagram_pemasak') is-danger @enderror" name="instagram_pemasak" value="{{ (old('instagram_pemasak')) ? old('instagram_pemasak') : $chefs->instagram }}" type="text" placeholder="Masukkan Instagram Pemasak">
                                             </div>
-                                            @error('ig_pemasak')
+                                            @error('instagram_pemasak')
                                             <p class="help is-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -145,6 +275,9 @@
                     </div>
                 </div>
             </div>
+            <!-- End Edit Chef Form Section -->
+
+            @endif
 
         </div>
     </div>

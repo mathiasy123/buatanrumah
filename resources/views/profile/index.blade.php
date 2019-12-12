@@ -130,6 +130,9 @@
             <p>Total Harga Pemesanan Anda : Rp. {{ number_format(session('order_notif')['total']) }}</p>
             <p>Silahkan, kontak pihak pemasak untuk melakukan transaksi pembayaran dan informasi lebih lanjut.</p>
             <p>Terima Kasih.</p>
+            <a href="https://wa.me/{{ $whatsapp_number }}?text=Konfirmasi%20Pemesanan" class="button is-success is-fullwidth">
+                Kontak Pemasak
+            </a>
         </div>
         </section>
     </div>

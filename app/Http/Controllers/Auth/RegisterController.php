@@ -46,29 +46,5 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * 
-     */
-    public function register(Request $request)
-    {
-        $request->validate([
-            'nama_user' => 'required|string|max:50',
-            'email' => 'required|unique:users,email|email:rfc,strict|max:50',
-            'nomor_telepon' => 'required|numeric|digits_between:9,15',
-            'password' => 'required|string|min:5|confirmed'
-        ]);
-
-        User::create([
-            'name' => strtolower(strip_tags($request->nama_user)),
-            'email' => strtolower($request->email),
-            'phone_call' => $request->nomor_telepon,
-            'password' => Hash::make($request->password)
-        ]);
-
-        return redirect('/login')->with('registered', 'Anda telah berhasil membuat akun, silahkan masuk aplikasi');
-    }
-
+    
 }

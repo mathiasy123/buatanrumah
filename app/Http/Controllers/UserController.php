@@ -52,6 +52,19 @@ class UserController extends Controller
         return view('chef.dashboard', compact('orders', 'count_order', 'foods', 'count_food', 'finished_orders', 'count_finished_order'));
     }
 
+    
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $action_type = 'tambah';
+
+        return view('admin.form.form_chef', compact('action_type'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,17 +73,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        session()->forget('chef_notif');
 
-    }
+        $request->validate([
+            'nama_pemasak' => 'required|string|max:50',
+            'email_pemasak' => 'required|email:rfc,strict|max:50',
+            'password' => 'required|string|min:5|confirmed',
+            'instagram_pemasak' => 'required|string|max:30',
+            'nomor_telepon' => 'required|numeric|digits_between:9,15',
+            'alamat_pemasak' => 'required|max:255',
+            'gambar_pemasak' => 'required|image|mimes:jpeg,png,jpg|max:5000'
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
+        $file = $request->file('gambar_pemasak');
+
+        $folder_path = public_path('user_assets\images\\chef\\');
+
+        $file_name = $request->nama_pemasak . '.' . $file->getClientOriginalExtension();
+
+        $file->move(public_path('user_assets\images\chef'), $file_name);
+
+        User::create([
+            'name' => strtolower(strip_tags($request->nama_pemasak)),
+            'email' => strtolower($request->email_pemasak),
+            'phone_call' => $request->nomor_telepon,
+            'address' => $request->alamat_pemasak,
+            'user_image' => $file_name,
+            'instagram' => $request->instagram_pemasak,
+            'password' => Hash::make($request->password)
+        ]);
+
+        session()->flash('chef_notif', 'Akun pemasak berhasil ditambahkan');
+
+        return redirect('/admin/pemasak');
     }
 
     /**
@@ -92,9 +127,11 @@ class UserController extends Controller
      */
     public function edit($user_id)
     {
+        $action_type = 'ubah';
+
         $chefs = User::find($user_id);
 
-        return view('admin.form.form_chef', compact('chefs'));
+        return view('admin.form.form_chef', compact('action_type', 'chefs'));
     }
 
     /**
@@ -113,8 +150,8 @@ class UserController extends Controller
         $request->validate([
             'nama_pemasak' => 'string|max:50',
             'email_pemasak' => 'email:rfc,strict|max:50',
-            'ig_pemasak' => 'string|max:30',
-            'telp_pemasak' => 'numeric|digits_between:9,15',
+            'instagram_pemasak' => 'string|max:30',
+            'nomor_telepon' => 'numeric|digits_between:9,15',
             'alamat_pemasak' => 'max:255',
             'gambar_pemasak' => 'image|mimes:jpeg,png,jpg|max:5000'
         ]);
@@ -123,11 +160,11 @@ class UserController extends Controller
 
         $chef->email = $request->email_pemasak;
 
-        $chef->phone_call = $request->telp_pemasak;
+        $chef->phone_call = $request->nomor_telepon;
 
         $chef->address = $request->alamat_pemasak;
 
-        $chef->instagram = $request->ig_pemasak;
+        $chef->instagram = $request->instagram_pemasak;
 
         $chef->save();
 
