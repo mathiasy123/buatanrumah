@@ -11,7 +11,6 @@
 |
 */
 
-
 /**
  * Admin (CMS) Login And Other Routes
  */
@@ -53,7 +52,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/ubah/pemasak-makanan', 'FoodController@update');
 
     Route::get('/pemasak-profil', 'AdminController@chefProfile');
-    Route::post('/pemasak-profil', 'A    dminController@chefProfile');
+    Route::post('/pemasak-profil', 'AdminController@chefProfile');
 
     Route::get('/tambah/pemasak-profil', 'ProfileController@create');
     Route::post('/tambah/pemasak-profil', 'ProfileController@store');

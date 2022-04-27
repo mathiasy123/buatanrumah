@@ -18,14 +18,22 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
+        $images = [
+            'Karna Kurniawan Muhammad.jpg',
+            'Kurniawan Muhammad Ali.jpg',
+            'Mathias Yeremia Aryadi.jpg',
+            'Vanya Fujiati M.Farm.jpg'
+        ];
 
         for($count = 1; $count <= 20; $count++) {
+            $choosen_image = array_rand($images, 1);
+
             User::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'phone_call' => '08999111697',
                 'address' => $faker->address,
-                'user_image' => 'Mask Group 1.png',
+                'user_image' => $images[$choosen_image],
                 'instagram' => $faker->username,
                 'password' => Hash::make('1234567')
             ]);

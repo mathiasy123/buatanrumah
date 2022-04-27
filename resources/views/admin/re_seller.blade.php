@@ -74,7 +74,7 @@
                                     @else
 
                                     <td>
-                                        <img src="{{ asset('reseller_images/frontend/' . $reseller->reseller_image) }}" width="150" height="140" alt="Foto Pemasak">
+                                        <img src="{{ asset('reseller_assets/images/' . $reseller->reseller_image) }}" width="150" height="140" alt="Foto Pemasak">
                                     </td>
 
                                     @endif

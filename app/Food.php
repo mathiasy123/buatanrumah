@@ -5,8 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Food extends Model
-{
+{   
 
+    protected $table = 'foods';
     /**
      * Indicates if the food model should be timestamped.
      *

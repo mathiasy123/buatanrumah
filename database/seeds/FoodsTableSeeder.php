@@ -24,7 +24,7 @@ class FoodsTableSeeder extends Seeder
                 'food_name' => 'Sop Buntut',
                 'rating' => $faker->numberBetween(1, 10),
                 'description' => $faker->text($maxNbChars = 50),
-                'image' => 'Sop Buntut.jpg',
+                'image' => 'Makanan.png',
                 'price' => 20000
             ]);
 
